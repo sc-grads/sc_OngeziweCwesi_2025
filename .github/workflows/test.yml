@@ -1,0 +1,28 @@
+name: Super-Linter with SQL Formatting
+
+on: push
+
+jobs:
+  super-lint:
+    name: Lint and Format SQL Files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install SQLFluff
+        run: pip install sqlfluff
+
+      - name: Lint SQL Files with SQLFluff
+        run: sqlfluff lint . --dialect postgres  # Change 'postgres' if using MySQL or other dialects
+
+      - name: Auto-Fix SQL Formatting Issues
+        run: sqlfluff fix . --dialect postgres  # This will auto-format SQL files
+
+      - name: Commit Fixed SQL Files (if changes were made)
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add .
+          git commit -m "Auto-formatted SQL files with SQLFluff" || echo "No changes to commit"
+          git push

@@ -1,0 +1,54 @@
+name: Check SQL Files
+
+on:
+  push:
+    paths:
+      - '**.sql'
+  pull_request:
+    paths:
+      - '**.sql'
+  workflow_dispatch:
+
+jobs:
+  sql-lint:
+    name: Lint SQL Files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install sql-lint
+        run: npm install -g sql-lint
+
+      - name: Run sql-lint on all SQL files
+        run: |
+          if find . -name "*.sql" | grep -q .; then
+            sql-lint **/*.sql
+          else
+            echo "No SQL files found."
+          fi
+
+  sql-validate:
+    name: Validate SQL Syntax
+    runs-on: ubuntu-latest
+    needs: sql-lint
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Start PostgreSQL
+        run: |
+          sudo systemctl start postgresql
+          sudo systemctl enable postgresql
+          sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'password';"
+
+      - name: Validate SQL Files
+        env:
+          PGPASSWORD: password
+        run: |
+          for file in $(find . -name "*.sql"); do
+            echo "Checking $file"
+            psql -U postgres -d postgres -f "$file"
+          done

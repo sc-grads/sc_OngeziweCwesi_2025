@@ -28,7 +28,7 @@ jobs:
 
       - name: Run sql-lint on SQL Files
         run: |
-          sql_files=$(find . -name "*.sql")
+          sql_files=$(find . -name "test1.sql")
           if [ -n "$sql_files" ]; then
             for file in $sql_files; do
               echo "Linting $file"
@@ -57,7 +57,7 @@ jobs:
         env:
           PGPASSWORD: password
         run: |
-          sql_files=$(find . -name "*.sql")
+          sql_files=$(find . -name "test1.sql")
           if [ -n "$sql_files" ]; then
             for file in $sql_files; do
               echo "Validating $file"

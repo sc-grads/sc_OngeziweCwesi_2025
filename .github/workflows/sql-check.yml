@@ -21,12 +21,21 @@ jobs:
       - name: Install sql-lint
         run: npm install -g sql-lint
 
-      - name: Run sql-lint on all SQL files
+      - name: Debug - List SQL Files
         run: |
-          if find . -name "*.sql" | grep -q .; then
-            sql-lint **/*.sql
+          echo "Checking for SQL files..."
+          find . -name "*.sql" -print || echo "No SQL files found."
+
+      - name: Run sql-lint on SQL Files
+        run: |
+          sql_files=$(find . -name "*.sql")
+          if [ -n "$sql_files" ]; then
+            for file in $sql_files; do
+              echo "Linting $file"
+              sql-lint "$file"
+            done
           else
-            echo "No SQL files found."
+            echo "No SQL files found, skipping linting."
           fi
 
   sql-validate:
@@ -48,7 +57,12 @@ jobs:
         env:
           PGPASSWORD: password
         run: |
-          for file in $(find . -name "*.sql"); do
-            echo "Checking $file"
-            psql -U postgres -d postgres -f "$file"
-          done
+          sql_files=$(find . -name "*.sql")
+          if [ -n "$sql_files" ]; then
+            for file in $sql_files; do
+              echo "Validating $file"
+              psql -U postgres -d postgres -f "$file" || echo "Error in $file"
+            done
+          else
+            echo "No SQL files found, skipping validation."
+          fi

@@ -1,0 +1,1 @@
+CREATEE TABLE users (id INT PRIMARY KEY);

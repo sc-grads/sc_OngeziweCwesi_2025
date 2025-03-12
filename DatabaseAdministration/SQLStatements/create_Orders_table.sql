@@ -1,7 +1,0 @@
-CREATE TABLE Orders(
-OrderID INT PRIMARY KEY IDENTITY(1,1),
-CustomerID INT,
-OrderDate DATE,
-Amount DECIMAL(10,2),
-FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
-);

@@ -1,0 +1,6 @@
+SELECT TOP (1000) [Title]
+      ,[FirstName]
+      ,[LastName]
+      ,[PhoneNumber]
+      ,[Name]
+  FROM [AdventureWorks2019].[dbo].[create_view]

@@ -2,7 +2,7 @@ SELECT TOP (1000) [EmpID]
         ,[EmpName]
         ,[SalesNumber]
         ,[ItemSold]
-    FROM [AdventureWorks2019].[dbo].[Sales]
+    FROM [AdventureWorks2019_repl].[dbo].[Sales]
 
 
 SELECT TOP (1000) [EmpID]
@@ -19,7 +19,7 @@ SELECT TOP (1000) [EmpID]
         ,[EmpName]
         ,[SalesNumber]
         ,[ItemSold]
-    FROM [AdventureWorks2019].[dbo].[Sales]
+    FROM [AdventureWorks2019_repl].[dbo].[Sales]
 
     select getdate()
 

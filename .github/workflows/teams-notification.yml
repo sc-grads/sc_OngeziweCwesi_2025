@@ -1,0 +1,22 @@
+name: Notify Teams on PR and Push
+on:
+  pull_request:
+    types: [opened, reopened, closed]
+  push:
+    branches:
+      - main
+
+jobs:
+  notify_teams:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Notification to Teams
+        run: |
+          curl -H "Content-Type: application/json" -d '{
+            "text": "**GitHub Notification**\n
+            **Repository:** '${{ github.repository }}'\n
+            **Event:** '${{ github.event_name }}'\n
+            **Actor:** '${{ github.actor }}'\n
+            **Branch:** '${{ github.ref }}'\n
+            **Action URL:** '${{ github.event.pull_request.html_url || github.event.head_commit.url }}'
+          }' '${{ secrets.TEAMS_WEBHOOK_URL }}'

@@ -1,1 +1,1 @@
-# sc_OngeziweCwesi_2025Testing CODEOWNERS
+# sc_OngeziweCwesi_2025

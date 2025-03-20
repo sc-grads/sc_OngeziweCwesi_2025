@@ -1,22 +1,15 @@
-name: Notify Teams on PR and Push
+name: PR Approval Notification
+ 
 on:
-  pull_request:
-    types: [opened, reopened, closed]
-  push:
-    branches:
-      - main
-
+  pull_request_review:
+    types: [submitted]
+ 
 jobs:
-  notify_teams:
+  notify-teams:
     runs-on: ubuntu-latest
     steps:
-      - name: Send Notification to Teams
+      - name: Send message to Microsoft Teams
         run: |
           curl -H "Content-Type: application/json" -d '{
-            "text": "**GitHub Notification**\n
-            **Repository:** '${{ github.repository }}'\n
-            **Event:** '${{ github.event_name }}'\n
-            **Actor:** '${{ github.actor }}'\n
-            **Branch:** '${{ github.ref }}'\n
-            **Action URL:** '${{ github.event.pull_request.html_url || github.event.head_commit.url }}'
-          }' '${{ secrets.TEAMS_WEBHOOK_URL }}'
+            "text": "🚀 Pull Request Approved! \nRepo: '${{ github.repository }}' \nPR: '${{ github.event.pull_request.html_url }}' \nApproved by: '${{ github.actor }}'"
+          }' '${{ secrets.WEBHOOK_TEAMS_URL }}'

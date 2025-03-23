@@ -1,0 +1,9 @@
+name: "Greet User"
+description: "Prints a greeting"
+inputs:
+  name:
+    required: true
+    description: "Name to greet"
+runs:
+  using: "node16"
+  main: "index.js"

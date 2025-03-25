@@ -1,0 +1,46 @@
+name: Auto-create SQL Database
+
+on:
+  workflow_dispatch:  # Allows manual trigger
+  push:              # Runs when you push to main
+    branches: [ main ]
+
+jobs:
+  create-database:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SQL tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sqlcmd
+
+      - name: Create Database and Table
+        env:
+          SQL_SERVER: ${{ secrets.SQL_SERVER }}
+          SQL_USER: ${{ secrets.SQL_USER }}
+          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+        run: |
+          # Create the database
+          sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -Q "CREATE DATABASE AutoTest"
+
+          # Create the table and stored procedure
+          sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -d AutoTest -Q "
+          CREATE TABLE [user] (
+              Name NVARCHAR(100),
+              Surname NVARCHAR(100),
+              Email NVARCHAR(255)
+          );
+
+          CREATE PROCEDURE InsertUser
+              @Name NVARCHAR(100),
+              @Surname NVARCHAR(100),
+              @Email NVARCHAR(255)
+          AS
+          BEGIN
+              INSERT INTO [user] (Name, Surname, Email)
+              VALUES (@Name, @Surname, @Email)
+          END;
+
+          -- Insert test data
+          EXEC InsertUser 'Test', 'User', 'test@example.com';
+          "

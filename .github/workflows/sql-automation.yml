@@ -1,4 +1,4 @@
-name: Auto-create SQL Database
+name: Auto-create SQL Database with Pinggy
 
 on:
   workflow_dispatch:
@@ -8,32 +8,25 @@ on:
 jobs:
   create-database:
     runs-on: ubuntu-latest
-    timeout-minutes: 10  # Increased timeout
+    timeout-minutes: 10  # Give enough time for Pinggy connection
     steps:
-      - name: Install Microsoft SQL Server Tools
+      - name: Install SQL Tools
         run: |
-          # Import Microsoft repository GPG key
           curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-          
-          # Register the Microsoft Ubuntu repository
           curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
-          
           sudo apt-get update
-          sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18 mssql-tools18 unixodbc-dev
+          sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18 mssql-tools18
           echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc
           source ~/.bashrc
 
-      - name: Test Connection
+      - name: Test Pinggy Connection
         env:
           SQL_SERVER: ${{ secrets.SQL_SERVER }}
           SQL_USER: ${{ secrets.SQL_USER }}
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
         run: |
-          # First test basic connectivity
-          nc -zv $(echo "$SQL_SERVER" | cut -d, -f1) $(echo "$SQL_SERVER" | cut -d, -f2) || echo "Network connection failed"
-          
-          # Then test SQL connection
-          /opt/mssql-tools18/bin/sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -Q "SELECT 1" || echo "SQL connection failed"
+          echo "Testing connection to Pinggy tunnel..."
+          /opt/mssql-tools18/bin/sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -Q "SELECT 1" || exit 1
 
       - name: Create Database and Table
         env:
@@ -42,23 +35,20 @@ jobs:
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
         run: |
           /opt/mssql-tools18/bin/sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -Q "CREATE DATABASE AutoTest"
-          
           /opt/mssql-tools18/bin/sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -d AutoTest -Q "
-          CREATE TABLE [user] (
-              Name NVARCHAR(100),
-              Surname NVARCHAR(100),
-              Email NVARCHAR(255)
-          );
-
-          CREATE PROCEDURE InsertUser
-              @Name NVARCHAR(100),
-              @Surname NVARCHAR(100),
-              @Email NVARCHAR(255)
-          AS
-          BEGIN
-              INSERT INTO [user] (Name, Surname, Email)
-              VALUES (@Name, @Surname, @Email)
-          END;
-
-          EXEC InsertUser 'Test', 'User', 'test@example.com';
+            CREATE TABLE [user] (
+                Name NVARCHAR(100),
+                Surname NVARCHAR(100),
+                Email NVARCHAR(255)
+            );
+            CREATE PROCEDURE InsertUser
+                @Name NVARCHAR(100),
+                @Surname NVARCHAR(100),
+                @Email NVARCHAR(255)
+            AS
+            BEGIN
+                INSERT INTO [user] (Name, Surname, Email)
+                VALUES (@Name, @Surname, @Email)
+            END;
+            EXEC InsertUser 'GitHub', 'Actions', 'github@example.com';
           "

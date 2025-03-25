@@ -8,24 +8,32 @@ on:
 jobs:
   create-database:
     runs-on: ubuntu-latest
+    timeout-minutes: 10  # Increased timeout
     steps:
       - name: Install Microsoft SQL Server Tools
         run: |
           # Import Microsoft repository GPG key
-          sudo curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
           
           # Register the Microsoft Ubuntu repository
-          sudo curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
+          curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
           
-          # Update package list
           sudo apt-get update
-          
-          # Install SQLCMD and unixodbc-dev
           sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18 mssql-tools18 unixodbc-dev
-          
-          # Add SQLCMD to path
           echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc
           source ~/.bashrc
+
+      - name: Test Connection
+        env:
+          SQL_SERVER: ${{ secrets.SQL_SERVER }}
+          SQL_USER: ${{ secrets.SQL_USER }}
+          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+        run: |
+          # First test basic connectivity
+          nc -zv $(echo "$SQL_SERVER" | cut -d, -f1) $(echo "$SQL_SERVER" | cut -d, -f2) || echo "Network connection failed"
+          
+          # Then test SQL connection
+          /opt/mssql-tools18/bin/sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -Q "SELECT 1" || echo "SQL connection failed"
 
       - name: Create Database and Table
         env:
@@ -33,10 +41,8 @@ jobs:
           SQL_USER: ${{ secrets.SQL_USER }}
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
         run: |
-          # Create the database
           /opt/mssql-tools18/bin/sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -Q "CREATE DATABASE AutoTest"
-
-          # Create the table and stored procedure
+          
           /opt/mssql-tools18/bin/sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -d AutoTest -Q "
           CREATE TABLE [user] (
               Name NVARCHAR(100),
@@ -54,6 +60,5 @@ jobs:
               VALUES (@Name, @Surname, @Email)
           END;
 
-          -- Insert test data
           EXEC InsertUser 'Test', 'User', 'test@example.com';
           "

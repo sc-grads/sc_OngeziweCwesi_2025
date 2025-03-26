@@ -18,14 +18,14 @@ jobs:
       - name: Deploy to Development
         uses: azure/sql-action@v2.3
         with:
-          connection-string: 'Server=${{ secrets.SQL_SERVER }};User ID=${{ secrets.SQL_USER }};Password=${{ secrets.SQL_PASSWORD }};Initial Catalog=master;'
+          connection-string: "Server=${{ secrets.SQL_SERVER }};User ID=${{ secrets.SQL_USER }};Password=${{ secrets.SQL_PASSWORD }};Initial Catalog=master;"
           path: 'sql-scripts/setup.sql'
           action: 'execute'
 
   deploy-prod:
     runs-on: windows-latest
     environment: Production
-    needs: deploy-dev  # Runs after dev succeeds
+    needs: deploy-dev
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -33,6 +33,6 @@ jobs:
       - name: Deploy to Production
         uses: azure/sql-action@v2.3
         with:
-          connection-string: 'Server=${{ secrets.PROD_SQL_SERVER }};User ID=${{ secrets.SQL_USER }};Password=${{ secrets.SQL_PASSWORD }};Initial Catalog=master;'
+          connection-string: "Server=${{ secrets.PROD_SQL_SERVER }};User ID=${{ secrets.SQL_USER }};Password=${{ secrets.SQL_PASSWORD }};Initial Catalog=master;"
           path: 'sql-scripts/setup.sql'
           action: 'execute'

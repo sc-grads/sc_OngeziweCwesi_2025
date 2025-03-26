@@ -1,54 +1,91 @@
-name: Auto-create SQL Database with Pinggy
+name: Automate SQL Server Setup
 
 on:
-  workflow_dispatch:
   push:
-    branches: [ main ]
+    branches:
+      - main
+  workflow_dispatch: # Allows manual triggering from GitHub UI
 
 jobs:
-  create-database:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10  # Give enough time for Pinggy connection
+  setup-sql:
+    runs-on: ubuntu-latest # Base OS for Docker compatibility
+    container:
+      image: mcr.microsoft.com/mssql-tools # Docker image with sqlcmd pre-installed
     steps:
-      - name: Install SQL Tools
-        run: |
-          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-          curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
-          sudo apt-get update
-          sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18 mssql-tools18
-          echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc
-          source ~/.bashrc
+      # Step 1: Checkout repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Test Pinggy Connection
+      # Step 2: Start Pinggy tunnel (assuming it's running locally and URL is in SQL_SERVER secret)
+      # Note: Since Pinggy is already running locally and exposed, we skip starting it here.
+      # If it needs to be started in the pipeline, you'd need a local runner or a separate step.
+
+      # Step 3: Install dependencies (sqlcmd is already in the container, but ensure connectivity)
+      - name: Verify sqlcmd availability
+        run: sqlcmd -?
+
+      # Step 4: Create Database, Stored Procedure, and Insert Data
+      - name: Setup Database and Table
+        env:
+          SQL_SERVER: ${{ secrets.SQL_SERVER }} # Pinggy URL
+          SQL_USER: ${{ secrets.SQL_USER }}     # Auto_user
+          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }} # Password
+        run: |
+          # Create the SQL script
+          cat << 'EOF' > setup.sql
+          USE master;
+          GO
+          
+          -- Create the database if it doesn't exist
+          IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'AutoTest')
+          BEGIN
+              CREATE DATABASE AutoTest;
+          END
+          GO
+          
+          USE AutoTest;
+          GO
+          
+          -- Create the stored procedure
+          IF OBJECT_ID('dbo.SetupUserTable', 'P') IS NOT NULL
+              DROP PROCEDURE dbo.SetupUserTable;
+          GO
+          
+          CREATE PROCEDURE dbo.SetupUserTable
+          AS
+          BEGIN
+              -- Create the user table if it doesn't exist
+              IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'user')
+              BEGIN
+                  CREATE TABLE [user] (
+                      Name VARCHAR(50),
+                      Surname VARCHAR(50),
+                      Email VARCHAR(100)
+                  );
+              END
+              
+              -- Insert sample data
+              INSERT INTO [user] (Name, Surname, Email)
+              VALUES 
+                  ('John', 'Doe', 'john.doe@example.com'),
+                  ('Jane', 'Smith', 'jane.smith@example.com'),
+                  ('Bob', 'Johnson', 'bob.johnson@example.com');
+          END
+          GO
+          
+          -- Execute the stored procedure
+          EXEC dbo.SetupUserTable;
+          GO
+          EOF
+          
+          # Run the SQL script against the SQL Server
+          sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -i setup.sql -d master
+
+      # Step 5: Verify the setup (optional)
+      - name: Verify Table Creation
         env:
           SQL_SERVER: ${{ secrets.SQL_SERVER }}
           SQL_USER: ${{ secrets.SQL_USER }}
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
         run: |
-          echo "Testing connection to Pinggy tunnel..."
-          /opt/mssql-tools18/bin/sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -Q "SELECT 1" || exit 1
-
-      - name: Create Database and Table
-        env:
-          SQL_SERVER: ${{ secrets.SQL_SERVER }}
-          SQL_USER: ${{ secrets.SQL_USER }}
-          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
-        run: |
-          /opt/mssql-tools18/bin/sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -Q "CREATE DATABASE AutoTest"
-          /opt/mssql-tools18/bin/sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -d AutoTest -Q "
-            CREATE TABLE [user] (
-                Name NVARCHAR(100),
-                Surname NVARCHAR(100),
-                Email NVARCHAR(255)
-            );
-            CREATE PROCEDURE InsertUser
-                @Name NVARCHAR(100),
-                @Surname NVARCHAR(100),
-                @Email NVARCHAR(255)
-            AS
-            BEGIN
-                INSERT INTO [user] (Name, Surname, Email)
-                VALUES (@Name, @Surname, @Email)
-            END;
-            EXEC InsertUser 'GitHub', 'Actions', 'github@example.com';
-          "
+          sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -Q "USE AutoTest; SELECT * FROM [user];" -d AutoTest

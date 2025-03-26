@@ -1,99 +1,37 @@
-name: Automate SQL Server Setup
+name: SQL Server Automation
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
-  setup-sql:
-    runs-on: ubuntu-latest # Base OS for Docker compatibility
+  automate-sql:
+    runs-on: docker-container
     container:
-      image: ubuntu:20.04 # Use a newer base image with compatible glibc
+      image: mcr.microsoft.com/mssql-tools
+
     steps:
-      # Step 1: Install dependencies (sqlcmd and other tools)
-      - name: Install prerequisites
-        run: |
-          apt-get update
-          apt-get install -y curl gnupg
-          curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-          curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
-          apt-get update
-          ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
-          echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
-          source ~/.bashrc
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      # Step 2: Checkout repository code
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # Step 3: Create Database, Stored Procedure, and Insert Data
-      - name: Setup Database and Table
-        env:
-          SQL_SERVER: ${{ secrets.SQL_SERVER }} # Pinggy URL
-          SQL_USER: ${{ secrets.SQL_USER }}     # Auto_user
-          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }} # Password
+      - name: Wait for SQL Server to be ready
         run: |
-          # Ensure sqlcmd is in PATH
-          export PATH="$PATH:/opt/mssql-tools/bin"
-          
-          # Create the SQL script
-          cat << 'EOF' > setup.sql
-          USE master;
-          GO
-          
-          -- Create the database if it doesn't exist
-          IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'AutoTest')
-          BEGIN
-              CREATE DATABASE AutoTest;
-          END
-          GO
-          
-          USE AutoTest;
-          GO
-          
-          -- Create the stored procedure
-          IF OBJECT_ID('dbo.SetupUserTable', 'P') IS NOT NULL
-              DROP PROCEDURE dbo.SetupUserTable;
-          GO
-          
-          CREATE PROCEDURE dbo.SetupUserTable
-          AS
-          BEGIN
-              -- Create the user table if it doesn't exist
-              IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'user')
-              BEGIN
-                  CREATE TABLE [user] (
-                      Name VARCHAR(50),
-                      Surname VARCHAR(50),
-                      Email VARCHAR(100)
-                  );
-              END
-              
-              -- Insert sample data
-              INSERT INTO [user] (Name, Surname, Email)
-              VALUES 
-                  ('John', 'Doe', 'john.doe@example.com'),
-                  ('Jane', 'Smith', 'jane.smith@example.com'),
-                  ('Bob', 'Johnson', 'bob.johnson@example.com');
-          END
-          GO
-          
-          -- Execute the stored procedure
-          EXEC dbo.SetupUserTable;
-          GO
-          EOF
-          
-          # Run the SQL script against the SQL Server
-          sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -i setup.sql -d master
+          for i in {1..10}; do
+            /opt/mssql-tools/bin/sqlcmd -S ${{ secrets.SQL_SERVER }} -U ${{ secrets.SQL_USER }} -P ${{ secrets.SQL_PASSWORD }} -Q "SELECT 1" && break
+            sleep 5
+          done
 
-      # Step 4: Verify the setup (optional)
-      - name: Verify Table Creation
-        env:
-          SQL_SERVER: ${{ secrets.SQL_SERVER }}
-          SQL_USER: ${{ secrets.SQL_USER }}
-          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+      - name: Create Database
         run: |
-          export PATH="$PATH:/opt/mssql-tools/bin"
-          sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -Q "USE AutoTest; SELECT * FROM [user];" -d AutoTest
+          /opt/mssql-tools/bin/sqlcmd -S ${{ secrets.SQL_SERVER }} -U ${{ secrets.SQL_USER }} -P ${{ secrets.SQL_PASSWORD }} -Q "IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'AutoTest') CREATE DATABASE AutoTest;"
+
+      - name: Create Table
+        run: |
+          /opt/mssql-tools/bin/sqlcmd -S ${{ secrets.SQL_SERVER }} -U ${{ secrets.SQL_USER }} -P ${{ secrets.SQL_PASSWORD }} -d AutoTest -Q "CREATE TABLE [user] (Name NVARCHAR(50), Surname NVARCHAR(50), Email NVARCHAR(100));"
+
+      - name: Create Stored Procedure
+        run: |
+          /opt/mssql-tools/bin/sqlcmd -S ${{ secrets.SQL_SERVER }} -U ${{ secrets.SQL_USER }} -P ${{ secrets.SQL_PASSWORD }} -d AutoTest -Q "CREATE PROCEDURE InsertUser @Name NVARCHAR(50), @Surname NVARCHAR(50), @Email NVARCHAR(100) AS BEGIN INSERT INTO [user] VALUES (@Name, @Surname, @Email); END;"
+
+      - name: Insert Data Using Stored Procedure
+        run: |
+          /opt/mssql-tools/bin/sqlcmd -S ${{ secrets.SQL_SERVER }} -U ${{ secrets.SQL_USER }} -P ${{ secrets.SQL_PASSWORD }} -d AutoTest -Q "EXEC InsertUser 'Ongeziwe', 'Cwesi', 'ongeziwe@example.com';"

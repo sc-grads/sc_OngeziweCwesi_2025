@@ -18,7 +18,7 @@ jobs:
       - name: Deploy to Development
         uses: azure/sql-action@v2.3
         with:
-          connection-string: 'Server=${{ secrets.DEV_SQL_SERVER }};User ID=${{ secrets.SQL_USER }};Password=${{ secrets.SQL_PASSWORD }};Initial Catalog=master;'
+          connection-string: 'Server=${{ secrets.SQL_SERVER }};User ID=${{ secrets.SQL_USER }};Password=${{ secrets.SQL_PASSWORD }};Initial Catalog=master;'
           path: 'sql-scripts/setup.sql'
           action: 'execute'
 

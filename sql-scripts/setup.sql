@@ -2,25 +2,26 @@
 USE master;
 GO
 
-CREATE OR ALTER PROCEDURE SetupAutoDBAlex
+-- Create the stored procedure
+CREATE OR ALTER PROCEDURE SetupAutoTest
 AS
 BEGIN
-    -- Create database if it doesn’t exist
-    IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'AutoDBAlex')
+    -- Check if the database exists, create it if it doesn’t
+    IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'AutoTest')
     BEGIN
-        CREATE DATABASE AutoDBAlex;
-        PRINT 'Database AutoDBAlex created.';
+        CREATE DATABASE AutoTest;
+        PRINT 'Database AutoTest created.';
     END
     ELSE
     BEGIN
-        PRINT 'Database AutoDBAlex already exists.';
+        PRINT 'Database AutoTest already exists.';
     END
 
-    -- Switch to AutoDBAlex
-    USE AutoDBAlex;
+    -- Switch to the AutoTest database
+    USE AutoTest;
     GO
 
-    -- Create user table if it doesn’t exist
+    -- Check if the table exists, create it if it doesn’t
     IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'user')
     BEGIN
         CREATE TABLE [user] (
@@ -35,15 +36,15 @@ BEGIN
         PRINT 'Table [user] already exists.';
     END
 
-    -- Insert initial data
+    -- Insert sample data
     INSERT INTO [user] (Name, Surname, Email)
     VALUES 
-        ('Alex', 'Smith', 'alex.smith@example.com'),
-        ('Emma', 'Jones', 'emma.jones@example.com');
-    PRINT 'Initial data inserted into [user] table.';
+        ('John', 'Doe', 'john.doe@example.com'),
+        ('Jane', 'Smith', 'jane.smith@example.com');
+    PRINT 'Sample data inserted into [user] table.';
 END;
 GO
 
 -- Execute the stored procedure
-EXEC SetupAutoDBAlex;
+EXEC SetupAutoTest;
 GO

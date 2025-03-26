@@ -4,33 +4,40 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: # Allows manual triggering from GitHub UI
+  workflow_dispatch:
 
 jobs:
   setup-sql:
     runs-on: ubuntu-latest # Base OS for Docker compatibility
     container:
-      image: mcr.microsoft.com/mssql-tools # Docker image with sqlcmd pre-installed
+      image: ubuntu:20.04 # Use a newer base image with compatible glibc
     steps:
-      # Step 1: Checkout repository code
+      # Step 1: Install dependencies (sqlcmd and other tools)
+      - name: Install prerequisites
+        run: |
+          apt-get update
+          apt-get install -y curl gnupg
+          curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+          curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+          apt-get update
+          ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
+          echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+          source ~/.bashrc
+
+      # Step 2: Checkout repository code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Start Pinggy tunnel (assuming it's running locally and URL is in SQL_SERVER secret)
-      # Note: Since Pinggy is already running locally and exposed, we skip starting it here.
-      # If it needs to be started in the pipeline, you'd need a local runner or a separate step.
-
-      # Step 3: Install dependencies (sqlcmd is already in the container, but ensure connectivity)
-      - name: Verify sqlcmd availability
-        run: sqlcmd -?
-
-      # Step 4: Create Database, Stored Procedure, and Insert Data
+      # Step 3: Create Database, Stored Procedure, and Insert Data
       - name: Setup Database and Table
         env:
           SQL_SERVER: ${{ secrets.SQL_SERVER }} # Pinggy URL
           SQL_USER: ${{ secrets.SQL_USER }}     # Auto_user
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }} # Password
         run: |
+          # Ensure sqlcmd is in PATH
+          export PATH="$PATH:/opt/mssql-tools/bin"
+          
           # Create the SQL script
           cat << 'EOF' > setup.sql
           USE master;
@@ -81,11 +88,12 @@ jobs:
           # Run the SQL script against the SQL Server
           sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -i setup.sql -d master
 
-      # Step 5: Verify the setup (optional)
+      # Step 4: Verify the setup (optional)
       - name: Verify Table Creation
         env:
           SQL_SERVER: ${{ secrets.SQL_SERVER }}
           SQL_USER: ${{ secrets.SQL_USER }}
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
         run: |
+          export PATH="$PATH:/opt/mssql-tools/bin"
           sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -Q "USE AutoTest; SELECT * FROM [user];" -d AutoTest

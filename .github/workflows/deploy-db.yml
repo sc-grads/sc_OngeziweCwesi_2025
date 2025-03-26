@@ -1,29 +1,38 @@
-name: Deploy AutoTest Database
+name: Deploy AutoDBAlex
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'sql-scripts/**'  # Trigger when SQL scripts change
+      - 'sql-scripts/**'
 
 jobs:
-  deploy:
+  deploy-dev:
     runs-on: windows-latest
+    environment: Development
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Deploy Setup Script
+      - name: Deploy to Development
         uses: azure/sql-action@v2.3
         with:
-          connection-string: 'Server=${{ secrets.SQL_SERVER }};User ID=${{ secrets.SQL_USER }};Password=${{ secrets.SQL_PASSWORD }};Initial Catalog=master;'
+          connection-string: 'Server=${{ secrets.DEV_SQL_SERVER }};User ID=${{ secrets.SQL_USER }};Password=${{ secrets.SQL_PASSWORD }};Initial Catalog=master;'
           path: 'sql-scripts/setup.sql'
           action: 'execute'
 
-      - name: Deploy Contacts Script
+  deploy-prod:
+    runs-on: windows-latest
+    environment: Production
+    needs: deploy-dev  # Runs after dev succeeds
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to Production
         uses: azure/sql-action@v2.3
         with:
-          connection-string: 'Server=${{ secrets.SQL_SERVER }};User ID=${{ secrets.SQL_USER }};Password=${{ secrets.SQL_PASSWORD }};Initial Catalog=AutoTest;'
-          path: 'sql-scripts/add-contacts.sql'
+          connection-string: 'Server=${{ secrets.PROD_SQL_SERVER }};User ID=${{ secrets.SQL_USER }};Password=${{ secrets.SQL_PASSWORD }};Initial Catalog=master;'
+          path: 'sql-scripts/setup.sql'
           action: 'execute'

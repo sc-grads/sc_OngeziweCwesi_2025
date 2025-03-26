@@ -1,0 +1,22 @@
+name: Deploy AutoTest Database
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'sql-scripts/**'  # Trigger only when SQL scripts change
+
+jobs:
+  deploy:
+    runs-on: windows-latest  # Use Windows runner since SQL Server tools are pre-installed
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Deploy SQL Script to SQL Server
+        uses: azure/sql-action@v2.3
+        with:
+          connection-string: 'Server=${{ secrets.SQL_SERVER }};User ID=${{ secrets.SQL_USER }};Password=${{ secrets.SQL_PASSWORD }};Initial Catalog=master;'
+          path: 'sql-scripts/setup.sql'
+          action: 'execute'

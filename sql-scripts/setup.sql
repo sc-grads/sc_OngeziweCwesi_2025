@@ -52,6 +52,7 @@ BEGIN TRY
         INSERT INTO [user] (Name, Surname, Email)
         VALUES 
             (''John'', ''Doe'', ''john.doe@example.com''),
+            (''Ongeziwe'', ''Cwesi'', ''ongeziwecwesi@gmail.com''),
             (''Jane'', ''Smith'', ''jane.smith@example.com'');
         PRINT ''Sample data inserted.'';
     END');

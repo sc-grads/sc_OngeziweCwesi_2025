@@ -1,4 +1,4 @@
-name: Deploy AutoDBAlex
+name: Deploy AutoTest Database
 
 on:
   push:
@@ -8,31 +8,27 @@ on:
       - 'sql-scripts/**'
 
 jobs:
-  deploy-dev:
+  deploy:
     runs-on: windows-latest
-    environment: Development
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Deploy to Development
+      - name: Deploy Setup Script
         uses: azure/sql-action@v2.3
         with:
-          connection-string: "Server=${{ secrets.SQL_SERVER }};User ID=${{ secrets.SQL_USER }};Password=${{ secrets.SQL_PASSWORD }};Initial Catalog=master;"
+          connection-string: 'Server=${{ secrets.SQL_SERVER }};User ID=${{ secrets.SQL_USER }};Password=${{ secrets.SQL_PASSWORD }};Initial Catalog=master;'
           path: 'sql-scripts/setup.sql'
           action: 'execute'
 
-  deploy-prod:
-    runs-on: windows-latest
-    environment: Production
-    needs: deploy-dev
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Deploy to Production
+      - name: Deploy Contacts Script
         uses: azure/sql-action@v2.3
         with:
-           connection-string: "Server=${{ secrets.PROD_SQL_SERVER }};User ID=${{ secrets.SQL_USER }};Password=${{ secrets.SQL_PASSWORD }};Initial Catalog=master;"
-          path: 'sql-scripts/setup.sql'
+          connection-string: 'Server=${{ secrets.SQL_SERVER }};User ID=${{ secrets.SQL_USER }};Password=${{ secrets.SQL_PASSWORD }};Initial Catalog=AutoTest;'
+          path: 'sql-scripts/add-contacts.sql'
           action: 'execute'
+
+      - name: Validate Results
+        run: |
+          sqlcmd -S ${{ secrets.SQL_SERVER }} -U ${{ secrets.SQL_USER }} -P ${{ secrets.SQL_PASSWORD }} -d AutoTest -Q "EXEC GetAllContacts"
+        shell: cmd

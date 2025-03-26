@@ -21,14 +21,3 @@ jobs:
           path: 'sql-scripts/setup.sql'
           action: 'execute'
 
-      - name: Deploy Contacts Script
-        uses: azure/sql-action@v2.3
-        with:
-          connection-string: 'Server=${{ secrets.SQL_SERVER }};User ID=${{ secrets.SQL_USER }};Password=${{ secrets.SQL_PASSWORD }};Initial Catalog=AutoTest;'
-          path: 'sql-scripts/add-contacts.sql'
-          action: 'execute'
-
-      - name: Validate Results
-        run: |
-          sqlcmd -S ${{ secrets.SQL_SERVER }} -U ${{ secrets.SQL_USER }} -P ${{ secrets.SQL_PASSWORD }} -d AutoTest -Q "EXEC GetAllContacts"
-        shell: cmd

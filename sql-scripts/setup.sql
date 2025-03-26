@@ -7,9 +7,9 @@ CREATE OR ALTER PROCEDURE SetupAutoTest
 AS
 BEGIN
     -- Check if the database exists, create it if it doesn’t
-    IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'TestAuto')
+    IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'AutoTest')
     BEGIN
-        CREATE DATABASE TestAuto;
+        CREATE DATABASE AutoTest;
         PRINT 'Database AutoTest created.';
     END
     ELSE
@@ -18,7 +18,7 @@ BEGIN
     END
 
     -- Switch to the AutoTest database
-    USE TestAuto;
+    USE AutoTest;
     GO
 
     -- Check if the table exists, create it if it doesn’t

@@ -65,6 +65,7 @@ BEGIN
         INSERT INTO [user] (Name, Surname, Email)
         VALUES 
             ('John', 'Doe', 'john.doe@example.com'),
+            ('Ongeziwe', 'Cwesi', 'ongeziwecwesi@example.com'),
             ('Jane', 'Smith', 'jane.smith@example.com');
         PRINT 'Sample data inserted into user table.';
     END TRY

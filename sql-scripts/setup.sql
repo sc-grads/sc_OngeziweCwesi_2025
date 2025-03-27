@@ -2,18 +2,18 @@ USE master;
 GO
 
 -- Stored procedure to create the database if it doesn't exist
-CREATE OR ALTER PROCEDURE sp_CreateAutoTest_OC_27March
+CREATE OR ALTER PROCEDURE sp_CreateAutoDBOngeziwe
 AS
 BEGIN
     BEGIN TRY
-        IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'AutoTest_OC_27March')
+        IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'AutoDBOngeziwe')
         BEGIN
-            CREATE DATABASE AutoTest_OC_27March;
-            PRINT 'Database AutoTest_OC_27March created.';
+            CREATE DATABASE AutoDBOngeziwe;
+            PRINT 'Database AutoDBOngeziwe created.';
         END
         ELSE
         BEGIN
-            PRINT 'Database AutoTest_OC_27March already exists.';
+            PRINT 'Database AutoDBOngeziwe already exists.';
         END
     END TRY
     BEGIN CATCH
@@ -24,16 +24,16 @@ END;
 GO
 
 -- Execute the stored procedure
-EXEC sp_CreateAutoTest_OC_27March;
+EXEC sp_CreateAutoDBOngeziwe;
 GO
 
 -- Switch to the new database
 BEGIN TRY
-    USE AutoTest_OC_27March;
-    PRINT 'Switched to AutoTest_OC_27March database.';
+    USE AutoDBOngeziwe;
+    PRINT 'Switched to AutoDBOngeziwe database.';
 END TRY
 BEGIN CATCH
-    PRINT 'Error switching to AutoTest_OC_27March: ' + ERROR_MESSAGE();
+    PRINT 'Error switching to AutoDBOngeziwe: ' + ERROR_MESSAGE();
     RETURN;
 END CATCH
 GO

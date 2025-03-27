@@ -1,12 +1,8 @@
 name: Deploy SQL Database with Multi-Environment Workflow
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'sql-scripts/**'
-
+  workflow_dispatch:
+  
 jobs:
   deploy-dev:
     runs-on: ubuntu-latest

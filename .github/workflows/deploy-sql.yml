@@ -17,6 +17,6 @@ jobs:
     uses: ./.github/workflows/sql-template.yml
     with:
       environment: production
-      sql_server: ${{ secrets.PROD_SQL_SERVER }}
-      sql_user: ${{ secrets.PROD_SQL_USER }}
-      sql_password: ${{ secrets.PROD_SQL_PASSWORD }}
+      sql_server: "rnnmh-41-13-228-53.a.free.pinggy.link,38629"
+      sql_user: "Auto_user"
+      sql_password: "qwerty"

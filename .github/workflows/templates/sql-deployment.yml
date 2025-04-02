@@ -1,6 +1,6 @@
 name: SQL Deployment Template
 
-# Inputs that the calling workflow will provide
+# Inputs for customization
 inputs:
   sql_server:
     description: 'SQL Server address (e.g., Pinggy URL)'
@@ -15,7 +15,7 @@ inputs:
     description: 'Name of the database to deploy/verify'
     required: true
   environment_name:
-    description: 'Name of the environment (e.g., development, production)'
+    description: 'Name of the environment (e.g., Development)'
     required: true
 
 jobs:

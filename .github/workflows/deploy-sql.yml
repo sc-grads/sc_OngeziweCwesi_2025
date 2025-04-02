@@ -5,10 +5,30 @@ on:
 
 jobs:
   deploy-dev:
-    uses: ./.github/workflows/sql-deployment.yml
-    with:
-      sql_server: "rnnmh-41-13-228-53.a.free.pinggy.link,38629"
-      sql_user: "Auto_user"
-      sql_password: "StrongPassword123!"
-      database_name: AutoDBOngeziwe
-      environment_name: Development
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install sqlcmd
+        run: |
+          echo "Installing sqlcmd for Development..."
+          sudo apt-get update || { echo "Failed to update package list"; exit 1; }
+          sudo apt-get install -y curl gnupg || { echo "Failed to install dependencies"; exit 1; }
+          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add - || { echo "Failed to add Microsoft key"; exit 1; }
+          curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list || { echo "Failed to add Microsoft repo"; exit 1; }
+          sudo apt-get update || { echo "Failed to update after adding repo"; exit 1; }
+          sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev || { echo "Failed to install mssql-tools"; exit 1; }
+          echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
+          echo "sqlcmd installed successfully."
+      - name: Deploy to Development Environment
+        run: |
+          echo "Deploying to Development: ${{ secrets.DEV_SQL_SERVER }}..."
+          sqlcmd -S "${{ secrets.DEV_SQL_SERVER }}" -U "${{ secrets.DEV_SQL_USER }}" -P "${{ secrets.DEV_SQL_PASSWORD }}" -i sql-scripts/setup.sql -l 60 || { echo "Deployment failed for Development: Check SQL Server connection or script errors"; exit 1; }
+          echo "Development deployment completed."
+      - name: Verify Development Deployment
+        run: |
+          echo "Verifying Development deployment..."
+          sqlcmd -S "${{ secrets.DEV_SQL_SERVER }}" -U "${{ secrets.DEV_SQL_USER }}" -P "${{ secrets.DEV_SQL_PASSWORD }}" -Q "USE AutoDBOngeziwe; SELECT * FROM [dbo].[user]" -l 60 || { echo "Verification failed for Development: Table 'user' may not exist or connection issue"; exit 1; }
+          echo "Development verification completed."

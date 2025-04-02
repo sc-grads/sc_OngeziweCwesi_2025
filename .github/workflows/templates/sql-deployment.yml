@@ -1,6 +1,8 @@
 name: SQL Deployment Template
 
-# Inputs for customization
+on:
+  workflow_dispatch:  # Dummy trigger to satisfy editor
+
 inputs:
   sql_server:
     description: 'SQL Server address (e.g., Pinggy URL)'
@@ -22,13 +24,10 @@ jobs:
   deploy-sql:
     runs-on: ubuntu-latest
     steps:
-      # Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      # Install sqlcmd with error handling
       - name: Install sqlcmd
         run: |
           echo "Installing sqlcmd for ${{ inputs.environment_name }}..."
@@ -40,15 +39,11 @@ jobs:
           sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev || { echo "Failed to install mssql-tools"; exit 1; }
           echo "/opt/mssql-tools/bin" >> $GITHUB_PATH
           echo "sqlcmd installed successfully."
-
-      # Deploy database with error handling
       - name: Deploy to ${{ inputs.environment_name }} Environment
         run: |
           echo "Deploying to ${{ inputs.environment_name }}: ${{ inputs.sql_server }}..."
           sqlcmd -S "${{ inputs.sql_server }}" -U "${{ inputs.sql_user }}" -P "${{ inputs.sql_password }}" -i sql-scripts/setup.sql -l 60 || { echo "Deployment failed for ${{ inputs.environment_name }}: Check SQL Server connection or script errors"; exit 1; }
           echo "${{ inputs.environment_name }} deployment completed."
-
-      # Verify deployment with error handling
       - name: Verify ${{ inputs.environment_name }} Deployment
         run: |
           echo "Verifying ${{ inputs.environment_name }} deployment..."

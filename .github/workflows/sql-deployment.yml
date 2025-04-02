@@ -1,7 +1,7 @@
 name: SQL Deployment Template
 
 on:
-  workflow_dispatch:  # Dummy trigger to satisfy editor
+  workflow_dispatch:  # Dummy trigger for editor validation
 
 inputs:
   sql_server:

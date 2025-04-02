@@ -8,15 +8,17 @@ jobs:
     uses: ./.github/workflows/sql-template.yml
     with:
       environment: development
-      sql_server: "rnjtb-41-13-228-53.a.free.pinggy.link,36679"
-      sql_user: "Auto_user"
-      sql_password: "StrongPassword123!"
+    secrets:
+      sql_server: ${{ secrets.DEV_SQL_SERVER }}
+      sql_user: ${{ secrets.DEV_SQL_USER }}
+      sql_password: ${{ secrets.DEV_SQL_PASSWORD }}
 
   deploy-prod:
     needs: deploy-dev
     uses: ./.github/workflows/sql-template.yml
     with:
       environment: production
-      sql_server: "rnnmh-41-13-228-53.a.free.pinggy.link,38629"
-      sql_user: "Auto_user"
-      sql_password: "qwerty"
+    secrets:
+      sql_server: ${{ secrets.PROD_SQL_SERVER }}
+      sql_user: ${{ secrets.PROD_SQL_USER }}
+      sql_password: ${{ secrets.PROD_SQL_PASSWORD }}

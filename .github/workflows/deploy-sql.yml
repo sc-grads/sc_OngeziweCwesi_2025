@@ -4,7 +4,7 @@ on:
   workflow_dispatch:  # Manual trigger
 
 jobs:
-  Development:
+  development:
     uses: ./.github/workflows/templates/sql-deployment.yml  # Call the template
     with:
       sql_server: ${{ secrets.DEV_SQL_SERVER }}  # Your Pinggy URL
@@ -12,15 +12,4 @@ jobs:
       sql_password: ${{ secrets.DEV_SQL_PASSWORD }}
       database_name: AutoDBOngeziwe
       environment_name: Development
-    environment: development  # GitHub environment for approval/rules
-
-  Production:
-    needs: Development  # Wait for dev deployment
-    uses: ./.github/workflows/templates/sql-deployment.yml  # Call the template
-    with:
-      sql_server: ${{ secrets.PROD_SQL_SERVER }}  # Partner’s Pinggy URL
-      sql_user: ${{ secrets.PROD_SQL_USER }}      # Auto_user on their machine
-      sql_password: ${{ secrets.PROD_SQL_PASSWORD }}
-      database_name: AutoDBOngeziwe
-      environment_name: Production
-    environment: production  # GitHub environment with approval
+    environment: development  # GitHub environment for rules

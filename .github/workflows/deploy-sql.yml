@@ -1,15 +1,14 @@
 name: Deploy SQL Database with Multi-Environment Workflow
 
 on:
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:
 
 jobs:
-  development:
-    uses: ./.github/workflows/templates/sql-deployment.yml  # Call the template
+  deploy-dev:
+    uses: ./.github/workflows/sql-deployment.yml
     with:
-      sql_server: ${{ secrets.DEV_SQL_SERVER }}  # Your Pinggy URL
-      sql_user: ${{ secrets.DEV_SQL_USER }}      # Auto_user
+      sql_server: ${{ secrets.DEV_SQL_SERVER }}
+      sql_user: ${{ secrets.DEV_SQL_USER }}
       sql_password: ${{ secrets.DEV_SQL_PASSWORD }}
       database_name: AutoDBOngeziwe
       environment_name: Development
-    environment: development  # GitHub environment for rules

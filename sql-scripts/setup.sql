@@ -65,6 +65,7 @@ BEGIN
         VALUES 
             ('John', 'Doe', 'john.doe@example.com'),
             ('Ongeziwe', 'Cwesi', 'ongeziwecwesi@example.com'),
+            ('Anelisiwe', 'Mbangatha', 'nellycwesi@example.com'),
             ('Jane', 'Smith', 'jane.smith@example.com');
         PRINT 'Sample data inserted into user table.';
     END TRY

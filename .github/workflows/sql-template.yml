@@ -42,26 +42,26 @@ jobs:
 
       - name: Deploy SQL
         run: |
-          echo "🚀 Starting deployment to ${{ inputs.environment }}..."
+          echo " Starting deployment to ${{ inputs.environment }}..."
 
           {
             sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -i sql-scripts/setup.sql -l 60
           } || {
-            echo "❌ Deployment failed for ${{ inputs.environment }}"
+            echo " Deployment failed for ${{ inputs.environment }}"
             exit 1
           }
 
-          echo "✅ Deployment successful for ${{ inputs.environment }}"
+          echo " Deployment successful for ${{ inputs.environment }}"
 
       - name: Verify Deployment
         run: |
-          echo "🔍 Verifying deployment for ${{ inputs.environment }}..."
+          echo " Verifying deployment for ${{ inputs.environment }}..."
 
           {
             sqlcmd -S "$SQL_SERVER" -U "$SQL_USER" -P "$SQL_PASSWORD" -Q "SELECT * FROM AutoDBOngeziwe.dbo.user" -l 60
           } || {
-            echo "❌ Verification failed for ${{ inputs.environment }}"
+            echo " Verification failed for ${{ inputs.environment }}"
             exit 1
           }
 
-          echo "✅ Verification successful for ${{ inputs.environment }}"
+          echo " Verification successful for ${{ inputs.environment }}"

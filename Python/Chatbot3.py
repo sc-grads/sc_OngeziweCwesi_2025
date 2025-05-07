@@ -31,5 +31,7 @@ def main() -> None:
                              'what can you do?': 'I can answer questions!',
                              'ok':'Great.'}
 
+    run_chatbot(knowledge=brain)
+
 if __name__ == '__main__':
     main()

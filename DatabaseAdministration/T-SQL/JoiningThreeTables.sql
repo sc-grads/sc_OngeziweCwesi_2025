@@ -18,3 +18,11 @@ left join tblTransaction T
 on E.EmployeeNumber = T.EmployeeNumber
 group by D.DepartmentHead
 order by D.DepartmentHead
+
+
+select *
+from tblDepartment
+join tblEmployee
+on tblDepartment.Department = tblEmployee.Department
+join tblTransaction
+on tblEmployee.EmployeeNumber = tblTransaction.EmployeeNumber

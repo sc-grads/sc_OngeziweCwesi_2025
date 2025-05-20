@@ -9,10 +9,7 @@ WHEN NOT MATCHED BY TARGET THEN
 	VALUES (S.Amount, S.DateOfTransaction, S.EmployeeNumber);
 ROLLBACK TRAN
 
--- tblTransaction (no) - tblTransactionNew (yes)
--- 1 tblTransaction - 1 tblTransactionNew
--- 1 tblTransaction - multiple rows TblTransactionNew
--- Let’s expand our MERGE statement
+
 SELECT DateOfTransaction, EmployeeNumber, COUNT(*) AS NumberOfRows
 FROM tblTransactionNew 
 GROUP BY DateOfTransaction, EmployeeNumber
@@ -35,3 +32,4 @@ WHEN NOT MATCHED THEN
 	VALUES (S.Amount, S.DateOfTransaction, S.EmployeeNumber)
 	OUTPUT deleted.*, inserted.*;
 ROLLBACK TRAN
+

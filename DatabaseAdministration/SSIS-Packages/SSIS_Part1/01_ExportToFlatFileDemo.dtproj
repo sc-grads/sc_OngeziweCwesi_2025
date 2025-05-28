@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">LAPTOP-938SNHB2</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAbxCSuoik80KpCPJp34D2GwAAAAACAAAAAAAQZgAAAAEAACAAAACp1CD6Af4XZ/rO140eC2cRL0kP+LiUFnfxEP1vl0PF4QAAAAAOgAAAAAIAACAAAACxSWdygYwW9pCC+gbxOoxAh16uWGfJZDJ+BPnC1tBlrJAAAAAjNrZ7vpExJ3uXqOLkbkl0b0ExXPPa+0o4S/LcvYOchjlsUashJo9ubvKnfnkSV/ncEaBgLC1BREPStwYJhE8uE/2XM42ZRhjSZepN60xaubQJW8DsDdKMV/zvnimbwBL6o2/nfSj/nadIrSZ7ALpEmLTDzIN4s+k0DYYYSDs5EuYnHQGuvPVI1P8iZ4TtuGtAAAAAWzB2o7rhm5R3x881kNmp9zGeM0UGXkU2/PYdHxk/KVq2+XfET++SEeurQmI76djKBJcTPZDwy2Xp+88oqQ/HGQ==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAbxCSuoik80KpCPJp34D2GwAAAAACAAAAAAAQZgAAAAEAACAAAAAGdllJA4Q0pZvmdyPnz7s8tvfZ75GOmwmmz+yMpQlf9QAAAAAOgAAAAAIAACAAAAAvWtmndUA2x8V6C1RqGyloquCBk+TcFhJCaAZmzui3wpAAAAC4qGr1S+d+MjgsNEejYCdSdux6Mc/1s5klae1KIS50y+lDHJbVFkUVRAGR7XF/Pmc7EDF147dUf5b8ro79wxc3bgwa0boT0U+JlZJYQUGMEpJ9JSupZhIkAjRTuxTdqL9CR+y9ihYHeg6RGA0t8+i2icepS7EXvCYHjYb8qcz2p9c499/oi2zPMN3K7SWdYelAAAAAgjPweanlg0wkIRmCFqHqQHifGdR1UjbO11GrkI3uUoCqHF6bvtc/L6MS181kjmV3f4zK+NCmRrfGGtd7+8iUzw==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -42,6 +42,7 @@
           <SSIS:Package SSIS:Name="11_AggregateDemo.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="12_AuditDemo.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="13_ExportColumnDemo.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="14_ImportColumnDemo.dtsx" SSIS:EntryPoint="1" />
         </SSIS:Packages>
         <SSIS:ConnectionManagers />
         <SSIS:DeploymentInfo>
@@ -4524,6 +4525,23 @@
                   </SSIS:Properties>
                 </SSIS:Parameter>
               </SSIS:Parameters>
+            </SSIS:PackageMetaData>
+            <SSIS:PackageMetaData SSIS:Name="14_ImportColumnDemo.dtsx">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">{6D8E2F9F-B265-413D-95EA-E014AB74A390}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">Package2</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionComments">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{EDEA6D80-6281-4C92-AE69-4EE1E965E873}</SSIS:Property>
+                <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
+              </SSIS:Properties>
+              <SSIS:Parameters />
             </SSIS:PackageMetaData>
           </SSIS:PackageInfo>
         </SSIS:DeploymentInfo>

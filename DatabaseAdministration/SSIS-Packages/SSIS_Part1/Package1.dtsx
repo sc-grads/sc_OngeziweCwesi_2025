@@ -1,30 +1,25 @@
-
 ﻿<?xml version="1.0"?>
-=======
-<?xml version="1.0"?>
-
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="5/27/2025 3:51:19 PM"
+  DTS:CreationDate="5/27/2025 3:37:41 PM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="LAPTOP-938SNHB2"
   DTS:CreatorName="LAPTOP-938SNHB2\OngeziweCwesi"
-
-  DTS:DTSID="{D8332E76-DFD8-46A4-96C0-17DD25A6A6C3}"
+  DTS:DTSID="{AF688E05-BCDB-4736-BAB9-7C6030EEB709}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="16.0.5685.0"
   DTS:LocaleID="7177"
-  DTS:ObjectName="03_CopyColumnDemo"
+  DTS:ObjectName="Package1"
   DTS:PackageType="5"
   DTS:VersionBuild="2"
-  DTS:VersionGUID="{77CC3EE6-1226-405E-965F-ABB0826B976D}">
+  DTS:VersionGUID="{D052881F-71A1-4BE4-82CE-06827B8B1BED}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
       DTS:CreationName="FLATFILE"
-      DTS:DTSID="{62C7F378-988B-42A1-AEAE-A5F3F490AE9B}"
+      DTS:DTSID="{EC9DB852-126D-4937-B399-6B722CFB32B6}"
       DTS:ObjectName="Flat File Connection Manager">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -35,7 +30,7 @@
           DTS:RowDelimiter=""
           DTS:TextQualifier="_x003C_none_x003E_"
           DTS:CodePage="1252"
-          DTS:ConnectionString="C:\sc_OngeziweCwesi_2025\DatabaseAdministration\SSIS-Packages\CCOutput.csv">
+          DTS:ConnectionString="C:\sc_OngeziweCwesi_2025\DatabaseAdministration\SSIS-Packages\SSIS_Part1\CMOutput.csv">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -43,7 +38,7 @@
               DTS:DataType="2"
               DTS:TextQualified="True"
               DTS:ObjectName="DepartmentID"
-              DTS:DTSID="{D476D56C-ACBA-431B-B03B-60A758BC5814}"
+              DTS:DTSID="{CF36A064-92EB-4ACC-8B7F-D1C906606A81}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -52,7 +47,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Name"
-              DTS:DTSID="{14B7AEEA-2797-4B81-BE72-B988B634C9E1}"
+              DTS:DTSID="{7D7B2934-16DF-4357-B93F-752A994184F3}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -61,7 +56,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="GroupName"
-              DTS:DTSID="{2976D9E1-68FB-4468-90E6-E71C143D2267}"
+              DTS:DTSID="{F63AE670-BF71-48EC-BF09-A6BCFDA6BB32}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -69,16 +64,7 @@
               DTS:DataType="135"
               DTS:TextQualified="True"
               DTS:ObjectName="ModifiedDate"
-              DTS:DTSID="{2CD200F7-2267-4287-B7C0-5CB417E84CC7}"
-              DTS:CreationName="" />
-            <DTS:FlatFileColumn
-              DTS:ColumnType="Delimited"
-              DTS:ColumnDelimiter="_x002C_"
-              DTS:MaximumWidth="50"
-              DTS:DataType="130"
-              DTS:TextQualified="True"
-              DTS:ObjectName="Copy of Name"
-              DTS:DTSID="{D244F99C-E6A9-4832-B0BE-2D3452D7BF4A}"
+              DTS:DTSID="{8A295D59-14B5-48E1-BA73-B7C7A572AB48}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -86,8 +72,8 @@
               DTS:MaximumWidth="50"
               DTS:DataType="130"
               DTS:TextQualified="True"
-              DTS:ObjectName="Copy of GroupName"
-              DTS:DTSID="{886540ED-5D24-4B13-B52B-4B5664379822}"
+              DTS:ObjectName="Department Name"
+              DTS:DTSID="{06F3C93F-63A6-40B2-B2B3-1632D555EE06}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -96,13 +82,13 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[LAPTOP-938SNHB2\SQLSERVER_2025.AdventureWorks2019]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{35F3DD79-D1AF-4823-B9C9-2C4945DC4AFE}"
+      DTS:DTSID="{05E19952-F955-4123-9A26-46A5F88F701C}"
       DTS:ObjectName="LAPTOP-938SNHB2\SQLSERVER_2025.AdventureWorks2019">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=LAPTOP-938SNHB2\SQLSERVER_2025;Initial Catalog=AdventureWorks2019;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-03_CopyColumnDemo-{35F3DD79-D1AF-4823-B9C9-2C4945DC4AFE}LAPTOP-938SNHB2\SQLSERVER_2025.AdventureWorks2019;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=LAPTOP-938SNHB2\SQLSERVER_2025;Initial Catalog=AdventureWorks2019;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{05E19952-F955-4123-9A26-46A5F88F701C}LAPTOP-938SNHB2\SQLSERVER_2025.AdventureWorks2019;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -112,7 +98,7 @@
       DTS:refId="Package\Data Flow Task"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{90DF5471-D249-47D7-8AAF-71F1F9081DF0}"
+      DTS:DTSID="{CF8233F3-3B19-4416-B23A-6970238B8D98}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
       DTS:ObjectName="Data Flow Task"
@@ -123,66 +109,94 @@
           version="1">
           <components>
             <component
-              refId="Package\Data Flow Task\Copy Column"
-              componentClassID="Microsoft.CopyMap"
-              contactInfo="Copy Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Copies input columns to new columns in the transformation output. For example, create a copy of the 'address' column so that it can be cleaned by subsequent transformations and leave the original column in place for auditing."
-              name="Copy Column">
+              refId="Package\Data Flow Task\Character Map"
+              componentClassID="Microsoft.CharacterMap"
+              contactInfo="Character Map;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Specifies the string operations to apply."
+              name="Character Map"
+              usesDispositions="true"
+              version="2">
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\Copy Column.Inputs[Copy Column Input]"
-                  name="Copy Column Input">
+                  refId="Package\Data Flow Task\Character Map.Inputs[Character Map Input]"
+                  name="Character Map Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Copy Column.Inputs[Copy Column Input].Columns[Name]"
+                      refId="Package\Data Flow Task\Character Map.Inputs[Character Map Input].Columns[Name]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="Name"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Name]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Copy Column.Inputs[Copy Column Input].Columns[GroupName]"
+                      refId="Package\Data Flow Task\Character Map.Inputs[Character Map Input].Columns[GroupName]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="GroupName"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[GroupName]" />
+                      errorOrTruncationOperation="Map Column"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[GroupName]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          dataType="System.UInt32"
+                          name="MapFlags"
+                          typeConverter="LCMappingType">256</property>
+                      </properties>
+                    </inputColumn>
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\Copy Column.Outputs[Copy Column Output]"
-                  name="Copy Column Output"
-                  synchronousInputId="Package\Data Flow Task\Copy Column.Inputs[Copy Column Input]">
+                  refId="Package\Data Flow Task\Character Map.Outputs[Character Map Output]"
+                  exclusionGroup="1"
+                  name="Character Map Output"
+                  synchronousInputId="Package\Data Flow Task\Character Map.Inputs[Character Map Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Copy Column.Outputs[Copy Column Output].Columns[Copy of Name]"
+                      refId="Package\Data Flow Task\Character Map.Outputs[Character Map Output].Columns[Department Name]"
                       dataType="wstr"
+                      errorOrTruncationOperation="Map Column"
                       length="50"
-                      lineageId="Package\Data Flow Task\Copy Column.Outputs[Copy Column Output].Columns[Copy of Name]"
-                      name="Copy of Name">
+                      lineageId="Package\Data Flow Task\Character Map.Outputs[Character Map Output].Columns[Department Name]"
+                      name="Department Name"
+                      truncationRowDisposition="FailComponent">
                       <properties>
+                        <property
+                          dataType="System.UInt32"
+                          description="Specifies the string operations to apply."
+                          name="MapFlags"
+                          typeConverter="LCMappingType">512</property>
                         <property
                           containsID="true"
                           dataType="System.Int32"
-                          description="Specifies the lineage identifier of the column to copy."
-                          name="copyColumnId">#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Name]}</property>
+                          description="Specifies the lineage identifier of the input column to which operations apply."
+                          name="InputColumnLineageID">#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Name]}</property>
                       </properties>
                     </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Character Map.Outputs[Character Map Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Character Map Error Output"
+                  synchronousInputId="Package\Data Flow Task\Character Map.Inputs[Character Map Input]">
+                  <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Copy Column.Outputs[Copy Column Output].Columns[Copy of GroupName]"
-                      dataType="wstr"
-                      length="50"
-                      lineageId="Package\Data Flow Task\Copy Column.Outputs[Copy Column Output].Columns[Copy of GroupName]"
-                      name="Copy of GroupName">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Specifies the lineage identifier of the column to copy."
-                          name="copyColumnId">#{Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[GroupName]}</property>
-                      </properties>
-                    </outputColumn>
+                      refId="Package\Data Flow Task\Character Map.Outputs[Character Map Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Character Map.Outputs[Character Map Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Character Map.Outputs[Character Map Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Character Map.Outputs[Character Map Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
@@ -251,19 +265,12 @@
                       externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ModifiedDate]"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ModifiedDate]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[Copy of Name]"
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[Department Name]"
                       cachedDataType="wstr"
                       cachedLength="50"
-                      cachedName="Copy of Name"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Copy of Name]"
-                      lineageId="Package\Data Flow Task\Copy Column.Outputs[Copy Column Output].Columns[Copy of Name]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].Columns[Copy of GroupName]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="Copy of GroupName"
-                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Copy of GroupName]"
-                      lineageId="Package\Data Flow Task\Copy Column.Outputs[Copy Column Output].Columns[Copy of GroupName]" />
+                      cachedName="Department Name"
+                      externalMetadataColumnId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Department Name]"
+                      lineageId="Package\Data Flow Task\Character Map.Outputs[Character Map Output].Columns[Department Name]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -286,15 +293,10 @@
                       dataType="dbTimeStamp"
                       name="ModifiedDate" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Copy of Name]"
+                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Department Name]"
                       dataType="wstr"
                       length="50"
-                      name="Copy of Name" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Copy of GroupName]"
-                      dataType="wstr"
-                      length="50"
-                      name="Copy of GroupName" />
+                      name="Department Name" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -468,13 +470,13 @@
           </components>
           <paths>
             <path
-              refId="Package\Data Flow Task.Paths[Copy Column Output]"
+              refId="Package\Data Flow Task.Paths[Character Map Output]"
               endId="Package\Data Flow Task\Flat File Destination.Inputs[Flat File Destination Input]"
-              name="Copy Column Output"
-              startId="Package\Data Flow Task\Copy Column.Outputs[Copy Column Output]" />
+              name="Character Map Output"
+              startId="Package\Data Flow Task\Character Map.Outputs[Character Map Output]" />
             <path
               refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
-              endId="Package\Data Flow Task\Copy Column.Inputs[Copy Column Input]"
+              endId="Package\Data Flow Task\Character Map.Inputs[Character Map Input]"
               name="OLE DB Source Output"
               startId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]" />
           </paths>
@@ -497,7 +499,7 @@
         <NodeLayout
           Size="150.4,41.6"
           Id="Package\Data Flow Task"
-          TopLeft="311.666649637952,70.199999511838" />
+          TopLeft="265.833318808841,34.666666425599" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -509,29 +511,41 @@
         <NodeLayout
           Size="152,41.6"
           Id="Package\Data Flow Task\OLE DB Source"
-          TopLeft="408.333311022985,20.7999998553594" />
+          TopLeft="323.33331566718,12.1333332489597" />
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\Data Flow Task\Flat File Destination"
-          TopLeft="421.666643627817,359.66666416559" />
+          TopLeft="338.333314847616,337.13333098895" />
         <NodeLayout
-          Size="141.6,45.6"
-          Id="Package\Data Flow Task\Copy Column"
-          TopLeft="416.666643901005,179.399998752475" />
+          Size="147.2,41.6"
+          Id="Package\Data Flow Task\Character Map"
+          TopLeft="352.49998074025,184.599998716315" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
-          TopLeft="485.899977461995,62.3999998553594">
+          TopLeft="399.33331566718,53.7333332489597">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,116.999998897115"
+              EndConnector="26.7666650730703,130.866665467355"
               Start="0,0"
-              End="0,109.499998897115">
+              End="26.7666650730703,123.366665467355">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,109.499998897115" />
+                    End="0,61.4333327336775" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,61.4333327336775"
+                    Point2="0,65.4333327336775"
+                    Point3="4,65.4333327336775" />
+                  <mssgle:LineSegment
+                    End="22.7666650730703,65.4333327336775" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22.7666650730703,65.4333327336775"
+                    Point2="26.7666650730703,65.4333327336775"
+                    Point3="26.7666650730703,69.4333327336775" />
+                  <mssgle:LineSegment
+                    End="26.7666650730703,123.366665467355" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -541,31 +555,19 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Copy Column Output]"
-          TopLeft="487.466643901005,224.999998752475">
+          Id="Package\Data Flow Task.Paths[Character Map Output]"
+          TopLeft="424.816647793933,226.199998716315">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="19.399999726812,134.666665413115"
+              EndConnector="0,110.933332272636"
               Start="0,0"
-              End="19.399999726812,127.166665413115">
+              End="0,103.433332272636">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,63.3333327065574" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,63.3333327065574"
-                    Point2="0,67.3333327065574"
-                    Point3="4,67.3333327065574" />
-                  <mssgle:LineSegment
-                    End="15.399999726812,67.3333327065574" />
-                  <mssgle:CubicBezierSegment
-                    Point1="15.399999726812,67.3333327065574"
-                    Point2="19.399999726812,67.3333327065574"
-                    Point3="19.399999726812,71.3333327065574" />
-                  <mssgle:LineSegment
-                    End="19.399999726812,127.166665413115" />
+                    End="0,103.433332272636" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -591,17 +593,4 @@
     </Properties>
   </PipelineComponentMetadata>
 </Objects>]]></DTS:DesignTimeProperties>
-
-  DTS:DTSID="{3EBAD7BF-2833-4A38-8137-B4C31C5FA84A}"
-  DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.5685.0"
-  DTS:LocaleID="7177"
-  DTS:ObjectName="Package2"
-  DTS:PackageType="5"
-  DTS:VersionGUID="{49CBD54D-B74E-49C1-8F80-B46766B84696}">
-  <DTS:Property
-    DTS:Name="PackageFormatVersion">8</DTS:Property>
-  <DTS:Variables />
-  <DTS:Executables />
-
 </DTS:Executable>

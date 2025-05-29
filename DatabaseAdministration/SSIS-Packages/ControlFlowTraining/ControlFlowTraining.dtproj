@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">LAPTOP-938SNHB2</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAbxCSuoik80KpCPJp34D2GwAAAAACAAAAAAAQZgAAAAEAACAAAAD0uv6nS/eRwlj0OVSaSeiEm74+Cbmsy9jSa4o8KQYtXQAAAAAOgAAAAAIAACAAAAAvedbZjAb6Fmdn5hQFQLg68EaQ2yQnG7dlF+7om+VWSZAAAADS1uNN08CSoZ5gl7VCMRnScCpl3rizsits8QN5i4ZbQsIrAldFbVJBRfcFkR9E7XTgj+d/PAyHOJmRhd/Q1EFxgU1RuYdunRCQAYaX7V5kFsnncXFghPP84HHHDaw47jL5z3cvlG+tJyHtUHr++lRST0OR6unzqPVRfvsHgPVGOBL7wtxqCTQiuefBCukvgn1AAAAACLiI9Lp5p5te6KQjLCTlmfvK3NqqFP2WYySUWtZXzUeVs56atzh2kvMCvmjqxnSegRoyOxchYtfNX5T8BO0T/A==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAbxCSuoik80KpCPJp34D2GwAAAAACAAAAAAAQZgAAAAEAACAAAADRPExSf4cJ0CzYvhht7z5C8voVcr9TbiruicSV1DnOgAAAAAAOgAAAAAIAACAAAABhEzHC1WmINPRRtejwowH0Ox2Q+TfrvL+bBztxbY2XKZAAAADb8mbHL9ygmHVSiagfXr3eNse039gyyEGHzrxDz61HS8dnNUB3rN6hRcpsV5vu0HuM3Ism7WjiHTXBh5ioObpq3e/I+pH38O5tpdj0hrgjzBhF4cioVZFRBftMlxbF94JxAFDUfVAS8nrG1AkfIUpIB4ZnKVLgPtbLD+MmiNhSWpjHcj5vhAyc+PO/WdFJSWdAAAAAkypqbGa2VHVR7e1RQTNS0py7iU1RFih4Nvt0LzA5kSXGDmrgE2UCHQ/ExdUtt4D4e4078TVpk/8A8EFNrMXJug==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -54,6 +54,7 @@
           <SSIS:Package SSIS:Name="21_ForEachSMOEnumeratorDemo.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="22_ForEachADOEnumeratorDemo.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="23_ConfigurationFilesDemo.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="24_ConfigurationTablesDemo.dtsx" SSIS:EntryPoint="1" />
         </SSIS:Packages>
         <SSIS:ConnectionManagers />
         <SSIS:DeploymentInfo>
@@ -2102,6 +2103,23 @@
                   </SSIS:Properties>
                 </SSIS:Parameter>
               </SSIS:Parameters>
+            </SSIS:PackageMetaData>
+            <SSIS:PackageMetaData SSIS:Name="24_ConfigurationTablesDemo.dtsx">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">{0FA9997F-3634-4C72-BB1C-6498A67A5E32}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">Package1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionComments">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{844F0795-C6C4-4130-9660-02B57D62D18C}</SSIS:Property>
+                <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
+              </SSIS:Properties>
+              <SSIS:Parameters />
             </SSIS:PackageMetaData>
           </SSIS:PackageInfo>
         </SSIS:DeploymentInfo>

@@ -1,5 +1,7 @@
+
 .vs/
 *.ispac
 bin/
 obj/
+*.ispac
 

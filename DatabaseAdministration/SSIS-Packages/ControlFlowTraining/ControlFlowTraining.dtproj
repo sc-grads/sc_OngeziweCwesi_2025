@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">LAPTOP-938SNHB2</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAbxCSuoik80KpCPJp34D2GwAAAAACAAAAAAAQZgAAAAEAACAAAAD/T0QoCPocObziXz9yq+6r0wks+AaVBzTbe9UXEZXB9QAAAAAOgAAAAAIAACAAAABQDj4qwQnBGvpUDR2mbdLL2dejJfba0hDhfveCubD6sJAAAABsCe226bswR0ng4frkZDWD/72duM8vUHBWziyWyKucPWer/1lZwat/EFT2dzXO9P9XcBqz0GeopO9f+MgXMKUkZCIQskVqm55U1aLWGoJtn0EaEbUkdkXQs/GoTwnvQCVhychwBEJyW9x0yDwM9cnB/CMgIR2BGwxTMzu33rdRu2ibdfhlTZD/u4zoj4VtFStAAAAAXSj1H4Y0rL8lCVdgKOMzVAoIl6ZPiJF/FfdDuhdUrk3sRA0116FyqO18LSNVpxdG/u5+pTLdAABMLahO3R5UMA==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAbxCSuoik80KpCPJp34D2GwAAAAACAAAAAAAQZgAAAAEAACAAAADWT67MinGftv+VaObLTn5rkyvrNAFr8601hz/Jdz2ZEAAAAAAOgAAAAAIAACAAAADyS9HzaDowh+GFkOSlx72uu1+TwaEjIP/06Iox9aAMepAAAACcjfVCiktkD0n52E+BRq6aTfyOMhTyyznGjEuhzfVIeTg+mof3JggWqbhKZCfnsXRZImt5Zr9lkbufXnm7m5CUXmXW6yxn+Tk2cmhkugsocuxrgpDY6yyVRlPIZ7wdB0jzo/0vJXOoLucCAJ5X2hNKldBLtrPIVXovvVPw4Q0/Dm7jaOKebVhcEJnrN0GQlOZAAAAA4/8LvX6LBa3J82o+OV/4m4vbAjwao3dI/V/LgnKL3q+UUl5Z2kPnmd85VRyEZ61e9GuuVEcggQSYQiUS/3CGPA==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -73,6 +73,7 @@
           <SSIS:Package SSIS:Name="40_RebuildIndexTaskDemo.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="41_ReorganizeIndexTaskDemo.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="42_CheckDatabaseIntegrityDemo.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="43_CheckPointsDemo.dtsx" SSIS:EntryPoint="1" />
         </SSIS:Packages>
         <SSIS:ConnectionManagers />
         <SSIS:DeploymentInfo>
@@ -2546,6 +2547,23 @@
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionGUID">{E878C848-321F-4C15-81EB-29BBA42D9350}</SSIS:Property>
+                <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
+              </SSIS:Properties>
+              <SSIS:Parameters />
+            </SSIS:PackageMetaData>
+            <SSIS:PackageMetaData SSIS:Name="43_CheckPointsDemo.dtsx">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">{060CF3AA-EA7C-427F-9671-BDA8EF5EC685}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">Package1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionComments">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{9FF5E8BB-CF37-44A8-8E9B-653B4973988B}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>

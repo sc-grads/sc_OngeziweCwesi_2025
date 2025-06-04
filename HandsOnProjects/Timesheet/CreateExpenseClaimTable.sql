@@ -1,10 +1,11 @@
 CREATE TABLE ExpenseClaim (
-    ClaimID INT IDENTITY(1,1) PRIMARY KEY,
-    EmployeeID INT FOREIGN KEY REFERENCES Employee(EmployeeID),
+    ExpenseClaimID INT IDENTITY(1,1) PRIMARY KEY,
+    EmployeeName NVARCHAR(100),
+    ClaimMonth DATE,
+    ExpenseDescription NVARCHAR(255),
     ExpenseType NVARCHAR(100),
     Amount DECIMAL(10,2),
-    ExpenseDate DATE,
-    Description NVARCHAR(255),
+    Notes NVARCHAR(500),
     FileName NVARCHAR(255),
     SheetName NVARCHAR(100),
     LoadTimestamp DATETIME DEFAULT GETDATE()

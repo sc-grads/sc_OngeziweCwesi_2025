@@ -1,6 +1,0 @@
-CREATE TABLE Employee (
-    EmployeeID INT IDENTITY(1,1) PRIMARY KEY,
-    FullName NVARCHAR(100) NOT NULL,
-    Email NVARCHAR(100),
-    Department NVARCHAR(100)
-);

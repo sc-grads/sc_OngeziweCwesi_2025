@@ -3,7 +3,7 @@ CREATE TABLE SheetAuditLog (
     FileName NVARCHAR(255),
     SheetName NVARCHAR(100),
     TableName NVARCHAR(100),
-    Status NVARCHAR(50),
+    Status NVARCHAR(50), -- e.g., Success, Error
     RowsInserted INT,
     ErrorMessage NVARCHAR(500),
     StartedAt DATETIME,

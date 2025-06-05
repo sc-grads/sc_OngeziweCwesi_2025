@@ -11,8 +11,8 @@
   DTS:LocaleID="7177"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="3"
-  DTS:VersionGUID="{8CEFC511-683C-461C-8577-3B8A24AFDACA}">
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{F8770CC1-5E3B-4811-912D-BFB87DB84AB6}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
           DTS:ConnectRetryInterval="0"
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=C:\Users\OngeziweCwesi\OneDrive - Northern Data (Pty) Ltd\Documents\Timesheets\Ongeziwe Cwesi\Ongeziwe Cwesi May Final Week.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=NO&quot;;" />
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=;Extended Properties=&quot;Excel 12.0 XML;HDR=NO&quot;;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -33,6 +33,18 @@
       DTS:CreationName="EXCEL"
       DTS:DTSID="{44DB288B-EF1E-463A-B92E-CAD39CAEFF6A}"
       DTS:ObjectName="Excel Connection Manager 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=C:\Users\OngeziweCwesi\OneDrive - Northern Data (Pty) Ltd\Documents\Timesheets\Ongeziwe Cwesi\Ongeziwe Cwesi May Final Week.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager 2]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{22A2C332-F1C3-4E35-B8F7-6463888CABFB}"
+      DTS:ObjectName="Excel Connection Manager 2">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
@@ -94,7 +106,7 @@
             <FEFEProperty
               Folder="C:\Users\OngeziweCwesi\OneDrive - Northern Data (Pty) Ltd\Documents\Timesheets" />
             <FEFEProperty
-              FileSpec="*.xlsx" />
+              FileSpec="*.*" />
             <FEFEProperty
               FileNameRetrievalType="0" />
             <FEFEProperty
@@ -161,8 +173,8 @@
                   <connections>
                     <connection
                       refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Connections[OleDbConnection]"
-                      connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
-                      connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                      connectionManagerID="Package.ConnectionManagers[Excel Connection Manager 2]"
+                      connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager 2]"
                       description="The OLE DB runtime connection used to access the database."
                       name="OleDbConnection" />
                   </connections>
@@ -249,23 +261,23 @@
                           name="F10"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[F1]"
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Consultant]"
                           dataType="date"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[F1]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[F1]"
-                          name="F1"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Consultant]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Consultant]"
+                          name="Consultant"
                           truncationRowDisposition="FailComponent" />
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[F2]"
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Ongeziwe]"
                           dataType="wstr"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[F2]"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Ongeziwe]"
                           length="255"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[F2]"
-                          name="F2"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Ongeziwe]"
+                          name="Ongeziwe"
                           truncationRowDisposition="FailComponent" />
                       </outputColumns>
                       <externalMetadataColumns
@@ -308,14 +320,14 @@
                           dataType="date"
                           name="F10" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[F1]"
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Consultant]"
                           dataType="date"
-                          name="F1" />
+                          name="Consultant" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[F2]"
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Ongeziwe]"
                           dataType="wstr"
                           length="255"
-                          name="F2" />
+                          name="Ongeziwe" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -324,16 +336,16 @@
                       name="Excel Source Error Output">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[F1]"
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Consultant]"
                           dataType="date"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[F1]"
-                          name="F1" />
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Consultant]"
+                          name="Consultant" />
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[F2]"
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Ongeziwe]"
                           dataType="wstr"
                           length="255"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[F2]"
-                          name="F2" />
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Ongeziwe]"
+                          name="Ongeziwe" />
                         <outputColumn
                           refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[F3]"
                           dataType="wstr"
@@ -522,18 +534,18 @@
                           externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EndTime]"
                           lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[F10]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[F1]"
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Consultant]"
                           cachedDataType="date"
-                          cachedName="F1"
+                          cachedName="Consultant"
                           externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EntryDate]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[F1]" />
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Consultant]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[F2]"
+                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Ongeziwe]"
                           cachedDataType="wstr"
                           cachedLength="255"
-                          cachedName="F2"
+                          cachedName="Ongeziwe"
                           externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DayOfWeek]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[F2]" />
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Ongeziwe]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -651,8 +663,8 @@
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
           DTS:CreationName=""
-          DTS:DTSID="{C26ED74E-AA50-45D4-AE1A-870EE9227C23}"
-          DTS:ObjectName="{C26ED74E-AA50-45D4-AE1A-870EE9227C23}"
+          DTS:DTSID="{7A7A6B3D-63AF-4D9F-B828-004258013F03}"
+          DTS:ObjectName="{7A7A6B3D-63AF-4D9F-B828-004258013F03}"
           DTS:ValueIndex="0"
           DTS:VariableName="User::ExcelFilePath" />
       </DTS:ForEachVariableMappings>
@@ -692,37 +704,37 @@
         <NodeLayout
           Size="140,41.6"
           Id="Package\Foreach Loop Container\Data Flow Task\Excel Source"
-          TopLeft="361.666646906072,114.399999204477" />
+          TopLeft="144.99999207755,90.9999993671974" />
         <NodeLayout
           Size="171.2,41.6"
           Id="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination"
-          TopLeft="357.499980467062,305.933331205911" />
+          TopLeft="141.666658926342,289.466664653752" />
         <EdgeLayout
           Id="Package\Foreach Loop Container\Data Flow Task.Paths[Excel Source Output]"
-          TopLeft="431.666646906072,155.999999204477">
+          TopLeft="214.99999207755,132.599999367197">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="11.43333356099,149.933332001434"
+              EndConnector="12.266666848792,156.866665286554"
               Start="0,0"
-              End="11.43333356099,142.433332001434">
+              End="12.266666848792,149.366665286554">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,70.9666660007172" />
+                    End="0,74.4333326432771" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,70.9666660007172"
-                    Point2="0,74.9666660007172"
-                    Point3="4,74.9666660007172" />
+                    Point1="0,74.4333326432771"
+                    Point2="0,78.4333326432771"
+                    Point3="4,78.4333326432771" />
                   <mssgle:LineSegment
-                    End="7.43333356099004,74.9666660007172" />
+                    End="8.26666684879203,78.4333326432771" />
                   <mssgle:CubicBezierSegment
-                    Point1="7.43333356099004,74.9666660007172"
-                    Point2="11.43333356099,74.9666660007172"
-                    Point3="11.43333356099,78.9666660007172" />
+                    Point1="8.26666684879203,78.4333326432771"
+                    Point2="12.266666848792,78.4333326432771"
+                    Point3="12.266666848792,82.4333326432771" />
                   <mssgle:LineSegment
-                    End="11.43333356099,142.433332001434" />
+                    End="12.266666848792,149.366665286554" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

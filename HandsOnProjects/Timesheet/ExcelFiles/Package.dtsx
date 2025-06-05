@@ -11,8 +11,8 @@
   DTS:LocaleID="7177"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="28"
-  DTS:VersionGUID="{C802319D-9333-4F91-8091-A9067B5AE3DF}">
+  DTS:VersionBuild="30"
+  DTS:VersionGUID="{BC7F383C-4033-4F01-A145-73C9E382BBBE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -134,6 +134,7 @@
               DTS:CreationName="Microsoft.Pipeline"
               DTS:DelayValidation="True"
               DTS:Description="Data Flow Task"
+              DTS:Disabled="True"
               DTS:DTSID="{EA26C0D3-8769-4027-8AE4-395C370DD730}"
               DTS:ExecutableType="Microsoft.Pipeline"
               DTS:LocaleID="-1"
@@ -491,7 +492,6 @@
               DTS:refId="Package\Foreach Loop Container\Foreach Loop Container\Script Task"
               DTS:CreationName="Microsoft.ScriptTask"
               DTS:Description="Script Task"
-              DTS:Disabled="True"
               DTS:DTSID="{EDBB9A50-3D39-4E71-B5BC-3AA3D6F21D17}"
               DTS:ExecutableType="Microsoft.ScriptTask"
               DTS:LocaleID="-1"

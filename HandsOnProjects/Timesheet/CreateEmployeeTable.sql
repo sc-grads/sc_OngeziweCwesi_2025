@@ -1,0 +1,6 @@
+CREATE TABLE Employee (
+    EmployeeID INT IDENTITY(1,1) PRIMARY KEY,
+    EmployeeName NVARCHAR(100) NOT NULL,
+    FolderPath NVARCHAR(500),
+    LoadTimestamp DATETIME DEFAULT GETDATE()
+);

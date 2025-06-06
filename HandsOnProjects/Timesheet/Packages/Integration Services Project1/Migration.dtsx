@@ -11,8 +11,8 @@
   DTS:LocaleID="7177"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="11"
-  DTS:VersionGUID="{32E2E159-D71D-4C34-8F23-1196925CB9FD}">
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{023AD27C-BC2F-4522-9EE9-CAB70E919A80}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -95,7 +95,8 @@
       DTS:Namespace="User"
       DTS:ObjectName="SheetName">
       <DTS:VariableValue
-        DTS:DataType="8">May</DTS:VariableValue>
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""

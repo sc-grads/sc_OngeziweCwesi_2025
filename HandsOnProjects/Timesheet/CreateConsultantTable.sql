@@ -1,0 +1,4 @@
+CREATE TABLE Consultant (
+    ConsultantID INT IDENTITY(1,1) PRIMARY KEY,
+    ConsultantName NVARCHAR(100) UNIQUE NOT NULL
+);

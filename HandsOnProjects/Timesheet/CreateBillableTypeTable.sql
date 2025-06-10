@@ -1,0 +1,4 @@
+CREATE TABLE BillableType (
+    BillableTypeID INT IDENTITY(1,1) PRIMARY KEY,
+    TypeName NVARCHAR(50) UNIQUE NOT NULL
+);

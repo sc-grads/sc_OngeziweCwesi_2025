@@ -11,8 +11,8 @@
   DTS:LocaleID="7177"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{7E55C4CE-642F-4135-AC27-1AE278A42E85}">
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{21CE90BC-1019-4673-842F-716BE2ED8A6E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +25,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
           DTS:ConnectRetryInterval="0"
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\OngeziweCwesi\OneDrive - Northern Data (Pty) Ltd\Documents\Timesheets\Ernest Mudau\Ronewa Ernest Mudau may Final week (1).xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=NO&quot;;" />
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\OngeziweCwesi\OneDrive - Northern Data (Pty) Ltd\Documents\Timesheets\Ernest Mudau\Ronewa Ernest Mudau may Final week (1).xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=NO&quot;;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -594,10 +594,6 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="140,41.6"
-          Id="Package\Foreach Loop Container\Data Flow Task\Excel Source"
-          TopLeft="405.833311159578,20.7999998553594" />
-        <NodeLayout
           Size="97.6,41.6"
           Id="Package\Foreach Loop Container\Data Flow Task\Sort"
           TopLeft="444.166642398471,186.333332037595" />
@@ -609,40 +605,10 @@
           Size="153.6,41.6"
           Id="Package\Foreach Loop Container\Data Flow Task\Conditional Split"
           TopLeft="416.666643901005,95.3333326703973" />
-        <EdgeLayout
-          Id="Package\Foreach Loop Container\Data Flow Task.Paths[Excel Source Output]"
-          TopLeft="475.833311159578,62.3999998553594">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="17.6333327414262,32.9333328150379"
-              Start="0,0"
-              End="17.6333327414262,25.4333328150379">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,12.466666407519" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,12.466666407519"
-                    Point2="0,16.466666407519"
-                    Point3="4,16.466666407519" />
-                  <mssgle:LineSegment
-                    End="13.6333327414262,16.466666407519" />
-                  <mssgle:CubicBezierSegment
-                    Point1="13.6333327414262,16.466666407519"
-                    Point2="17.6333327414262,16.466666407519"
-                    Point3="17.6333327414262,20.466666407519" />
-                  <mssgle:LineSegment
-                    End="17.6333327414262,25.4333328150379" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+        <NodeLayout
+          Size="140,41.6"
+          Id="Package\Foreach Loop Container\Data Flow Task\Excel Source"
+          TopLeft="405.833311159578,20.7999998553594" />
         <EdgeLayout
           Id="Package\Foreach Loop Container\Data Flow Task.Paths[ValidClient]"
           TopLeft="493.216643149738,136.933332670397">
@@ -689,11 +655,45 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Data Flow Task.Paths[Excel Source Output]"
+          TopLeft="475.833311159578,62.3999998553594">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="17.6333327414262,32.9333328150379"
+              Start="0,0"
+              End="17.6333327414262,25.4333328150379">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.466666407519" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.466666407519"
+                    Point2="0,16.466666407519"
+                    Point3="4,16.466666407519" />
+                  <mssgle:LineSegment
+                    End="13.6333327414262,16.466666407519" />
+                  <mssgle:CubicBezierSegment
+                    Point1="13.6333327414262,16.466666407519"
+                    Point2="17.6333327414262,16.466666407519"
+                    Point3="17.6333327414262,20.466666407519" />
+                  <mssgle:LineSegment
+                    End="17.6333327414262,25.4333328150379" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Foreach Loop Container\Data Flow Task\Excel Source">
+    design-time-name="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -706,7 +706,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination">
+    design-time-name="Package\Foreach Loop Container\Data Flow Task\Excel Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

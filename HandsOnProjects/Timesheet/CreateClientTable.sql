@@ -1,0 +1,6 @@
+CREATE TABLE Client (
+    ClientID INT IDENTITY(1,1) PRIMARY KEY,
+    ClientName NVARCHAR(100) UNIQUE NOT NULL,
+    SourceFileName NVARCHAR(255),
+    LoadTimestamp DATETIME DEFAULT GETDATE()
+);

@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "MigratingTimesheet", "MigratingTimesheet.dtproj", "{EE33419C-947B-50AE-8E59-E1A16CB89915}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE33419C-947B-50AE-8E59-E1A16CB89915}.Development|Default.ActiveCfg = Development
+		{EE33419C-947B-50AE-8E59-E1A16CB89915}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DAB42A86-F2C4-4A63-AB3F-C0147A431EE0}
+	EndGlobalSection
+EndGlobal

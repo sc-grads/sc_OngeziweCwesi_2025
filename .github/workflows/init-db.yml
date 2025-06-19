@@ -33,4 +33,4 @@ jobs:
           SQL_PASS: ${{ secrets.SQL_PASSWORD }}
         run: |
           export PATH="$PATH:/opt/mssql-tools/bin"
-          sqlcmd -S $PINGGY_HOSTPORT -U $SQL_USER -P $SQL_PASS -i sql/InitTimesheetDB.sql
+          sqlcmd -S $PINGGY_HOSTPORT -U $SQL_USER -P $SQL_PASS -i HandsOnProjects/Timesheet/sql/InitTimesheetDB.sql

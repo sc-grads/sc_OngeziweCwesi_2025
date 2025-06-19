@@ -1,0 +1,27 @@
+name: Deploy SSIS Packages to SSISDB
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-ssis:
+    runs-on: self-hosted  # Make sure you've set up a self-hosted runner
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Build SSIS Project into ISPAC
+        run: |
+          "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" ^
+          "HandsOnProjects/Timesheet/Packages/Integration Services Project2/Integration Services Project2.dtproj" ^
+          /p:Configuration=Development ^
+          /p:OutputPath="HandsOnProjects/Timesheet/Packages/Integration Services Project2/bin"
+
+      - name: Deploy ISPAC to SSISDB
+        run: |
+          "C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\ISDeploymentWizard.exe" ^
+          /Silent ^
+          /SourcePath:"HandsOnProjects/Timesheet/Packages/Integration Services Project2/bin/Integration Services Project2.ispac" ^
+          /DestinationServer:"LAPTOP-938SNHB2\MSSQLSERVER01" ^
+          /DestinationPath:"SSISDB\Automation\Projects\Integration Services Project2\Packages"

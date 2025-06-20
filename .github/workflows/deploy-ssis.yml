@@ -22,7 +22,7 @@ jobs:
           # Metadata
           $PROJECT_NAME = "Integration Services Project2"
           $FOLDER_NAME = "Automation"
-          $DEPLOY_SERVER = "LAPTOP-938SNHB2\\MSSQLSERVER01"
+          $DEPLOY_SERVER = "LAPTOP-938SNHB2\SQLSERVER_2025"
 
           Write-Host "Deploying SSIS project to SSISDB..."
 

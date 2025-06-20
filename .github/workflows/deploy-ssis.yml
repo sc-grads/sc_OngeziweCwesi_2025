@@ -18,7 +18,7 @@ jobs:
 
           $ISPAC_PATH = "HandsOnProjects/Timesheet/Packages/Integration Services Project2/bin/Development/Integration Services Project2.ispac"
           $PROJECT_NAME = "Integration Services Project2"
-          $FOLDER_NAME = "Timesheet"
+          $FOLDER_NAME = "Automation"
           $DEPLOY_SERVER = "LAPTOP-938SNHB2\MSSQLSERVER01"
 
           Write-Host "Deploying SSIS project to SSISDB..."

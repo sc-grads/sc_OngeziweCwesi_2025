@@ -31,7 +31,8 @@ jobs:
             /ModelType:Project `
             /SourcePath:"$ISPAC_PATH" `
             /DestinationServer:"$DEPLOY_SERVER" `
-            /DestinationPath:"SSISDB\$FOLDER_NAME\$PROJECT_NAME"
+            /DestinationPath:"/SSISDB/Automation/Integration Services Project2"
+
 
           if ($LASTEXITCODE -ne 0) {
             throw " SSIS deployment failed with exit code $LASTEXITCODE"

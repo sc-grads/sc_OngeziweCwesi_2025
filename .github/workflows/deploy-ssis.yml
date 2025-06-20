@@ -28,7 +28,6 @@ jobs:
 
           & "C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\ISDeploymentWizard.exe" `
             /Silent `
-            /ServerMode:True `
             /ModelType:Project `
             /SourcePath:"$ISPAC_PATH" `
             /DestinationServer:"$DEPLOY_SERVER" `

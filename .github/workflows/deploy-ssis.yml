@@ -13,10 +13,10 @@ jobs:
 
       - name: Enable PowerShell script execution
         run: Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
-        shell: pwsh
+        shell: powershell
 
       - name: Locate and deploy SSIS .ispac file
-        shell: pwsh
+        shell: powershell
         run: |
           $ISPAC_PATH = "HandsOnProjects/Timesheet/Packages/Integration Services Project2/bin/Development/Integration Services Project2.ispac"
           $PROJECT_NAME = "Integration Services Project2"

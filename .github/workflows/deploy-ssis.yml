@@ -11,19 +11,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Enable PowerShell script execution
-        run: Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
-        shell: powershell
-
-      - name: Locate and deploy SSIS .ispac file
+      - name: Deploy SSIS .ispac to SSISDB
         shell: powershell
         run: |
+          Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
+
           $ISPAC_PATH = "HandsOnProjects/Timesheet/Packages/Integration Services Project2/bin/Development/Integration Services Project2.ispac"
           $PROJECT_NAME = "Integration Services Project2"
           $FOLDER_NAME = "Timesheet"
           $DEPLOY_SERVER = "LAPTOP-938SNHB2\MSSQLSERVER01"
-          $DEPLOY_USER = "${{ secrets.SQL_USER }}"
-          $DEPLOY_PASS = "${{ secrets.SQL_PASSWORD }}"
 
           Write-Host "Deploying SSIS project to SSISDB..."
 
@@ -32,9 +28,7 @@ jobs:
             /ModelType:Project `
             /SourcePath:"$ISPAC_PATH" `
             /DestinationServer:"$DEPLOY_SERVER" `
-            /DestinationPath:"SSISDB\$FOLDER_NAME\$PROJECT_NAME" `
-            /UserName:"$DEPLOY_USER" `
-            /Password:"$DEPLOY_PASS"
+            /DestinationPath:"SSISDB\$FOLDER_NAME\$PROJECT_NAME"
 
           if ($LASTEXITCODE -ne 0) {
             throw "SSIS deployment failed with exit code $LASTEXITCODE"

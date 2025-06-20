@@ -27,7 +27,7 @@ jobs:
 
           Write-Host "Deploying SSIS project to SSISDB..."
 
-          & "C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\ISDeploymentWizard.exe" `
+          & "C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\ISDeploymentWizard.exe" `
             /Silent `
             /ModelType:Project `
             /SourcePath:"$ISPAC_PATH" `

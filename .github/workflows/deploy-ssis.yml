@@ -61,22 +61,35 @@ jobs:
           SSIS_SERVER: "LAPTOP-938SNHB2\\MSSQLSERVER01"
           SSIS_FOLDER: "Automation"
           SSIS_PROJECT: "Integration Services Project2"
-          SSISDB_PATH: "/SSISDB/${{ env.SSIS_FOLDER }}/${{ env.SSIS_PROJECT }}"
+          SSISDB_PATH: "/SSISDB/Automation/Integration Services Project2" # Hardcoded for reliability
         run: |
           Write-Host "Starting SSIS deployment..."
           Write-Host "ISPAC Path: ${{ env.ISPAC_PATH }}"
           Write-Host "Deploying to: ${{ env.SSISDB_PATH }}"
-          
-          # Run ISDeploymentWizard
-          & "${{ env.ISDEPLOYMENTWIZARD }}" `
-            /Silent `
-            /ModelType:Project `
-            /SourcePath:"${{ env.ISPAC_PATH }}" `
-            /DestinationServer:"${{ env.SSIS_SERVER }}" `
-            /DestinationPath:"${{ env.SSISDB_PATH }}"
-          
-          if ($LASTEXITCODE -ne 0) {
-            throw "SSIS deployment failed with exit code $LASTEXITCODE"
-          } else {
-            Write-Host "SSIS deployment completed successfully."
+          Write-Host "SSIS Server: ${{ env.SSIS_SERVER }}"
+          Write-Host "SSIS Folder: ${{ env.SSIS_FOLDER }}"
+          Write-Host "SSIS Project: ${{ env.SSIS_PROJECT }}"
+
+          # Validate SSISDB_PATH
+          if (-not "${{ env.SSISDB_PATH }}".StartsWith("/SSISDB/") -or "${{ env.SSISDB_PATH }}" -eq "/SSISDB//") {
+            throw "Invalid SSISDB_PATH: ${{ env.SSISDB_PATH }}"
+          }
+
+          try {
+            # Run ISDeploymentWizard and capture output
+            $output = & "${{ env.ISDEPLOYMENTWIZARD }}" `
+              /Silent `
+              /ModelType:Project `
+              /SourcePath:"${{ env.ISPAC_PATH }}" `
+              /DestinationServer:"${{ env.SSIS_SERVER }}" `
+              /DestinationPath:"${{ env.SSISDB_PATH }}" 2>&1
+            $exitCode = $LASTEXITCODE
+            Write-Host "ISDeploymentWizard Output: $output"
+            if ($exitCode -ne 0) {
+              throw "SSIS deployment failed with exit code $exitCode. Output: $output"
+            } else {
+              Write-Host "SSIS deployment completed successfully."
+            }
+          } catch {
+            throw "SSIS deployment error: $_"
           }

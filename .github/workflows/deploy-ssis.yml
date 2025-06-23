@@ -40,5 +40,5 @@ jobs:
             Write-Error "SSIS deployment failed with exit code $LASTEXITCODE"
             exit 1
           } else {
-            Write-Host "✅ SSIS deployment completed successfully."
+            Write-Host " SSIS deployment completed successfully."
           }

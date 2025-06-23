@@ -21,7 +21,7 @@ jobs:
           $ispacPath = "$env:GITHUB_WORKSPACE/HandsOnProjects/Timesheet/Packages/Integration Services Project2/bin/Development/Integration Services Project2.ispac"
           $folderName = "Automation"
           $projectName = "Integration Services Project2"
-          $destinationServer = "LAPTOP-938SNHB2\SQLSERVER_2025"
+          $destinationServer = "LAPTOP-938SNHB2\MSSQLSERVER01"
           $destinationPath = "/SSISDB/$folderName/$projectName"
 
           if (-Not (Test-Path $ispacPath)) {

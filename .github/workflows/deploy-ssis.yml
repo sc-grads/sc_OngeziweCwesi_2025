@@ -25,16 +25,6 @@ jobs:
           if (-Not (Test-Path "${{ env.ISPAC_PATH }}")) {
             throw "ISPAC file not found at: ${{ env.ISPAC_PATH }}"
           }
-          # Verify SQL Server connectivity
-          try {
-            $sqlConnection = New-Object System.Data.SqlClient.SqlConnection
-            $sqlConnection.ConnectionString = "Server=LAPTOP-938SNHB2\\MSSQLSERVER01;Integrated Security=True"
-            $sqlConnection.Open()
-            Write-Host "Successfully connected to SQL Server."
-            $sqlConnection.Close()
-          } catch {
-            throw "Failed to connect to SQL Server: $_"
-          }
           Write-Host "Prerequisites validated successfully."
 
       - name: Create SSISDB folder if not exists
@@ -71,7 +61,7 @@ jobs:
           SSIS_SERVER: "LAPTOP-938SNHB2\\MSSQLSERVER01"
           SSIS_FOLDER: "Automation"
           SSIS_PROJECT: "Integration Services Project2"
-          SSISDB_PATH: "/SSISDB/Automation/Integration Services Project2"
+          SSISDB_PATH: "/SSISDB/Automation/Integration Services Project2" # Hardcoded for reliability
         run: |
           Write-Host "Starting SSIS deployment..."
           Write-Host "ISPAC Path: ${{ env.ISPAC_PATH }}"
@@ -85,25 +75,16 @@ jobs:
             throw "Invalid SSISDB_PATH: ${{ env.SSISDB_PATH }}"
           }
 
-          # Test ISDeploymentWizard manually
           try {
-            $wizardVersion = & "${{ env.ISDEPLOYMENTWIZARD }}" /? | Out-String
-            Write-Host "ISDeploymentWizard Version Info: $wizardVersion"
-          } catch {
-            Write-Warning "Failed to run ISDeploymentWizard /?: $_"
-          }
-
-          # Run ISDeploymentWizard with detailed error capture
-          try {
+            # Run ISDeploymentWizard and capture output
             $output = & "${{ env.ISDEPLOYMENTWIZARD }}" `
               /Silent `
               /ModelType:Project `
               /SourcePath:"${{ env.ISPAC_PATH }}" `
               /DestinationServer:"${{ env.SSIS_SERVER }}" `
-              /DestinationPath:"${{ env.SSISDB_PATH }}" 2>&1 | Out-String
+              /DestinationPath:"${{ env.SSISDB_PATH }}" 2>&1
             $exitCode = $LASTEXITCODE
             Write-Host "ISDeploymentWizard Output: $output"
-            Write-Host "ISDeploymentWizard Exit Code: $exitCode"
             if ($exitCode -ne 0) {
               throw "SSIS deployment failed with exit code $exitCode. Output: $output"
             } else {

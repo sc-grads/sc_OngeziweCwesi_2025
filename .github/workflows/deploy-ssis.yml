@@ -7,40 +7,71 @@ jobs:
   deploy-ssis:
     runs-on: self-hosted
 
+    env:
+      ISPAC_PATH: "${{ github.workspace }}/HandsOnProjects/Timesheet/Packages/Integration Services Project2/bin/Development/Integration Services Project2.ispac"
+      SSIS_FOLDER: "Automation"
+      SSIS_PROJECT: "Integration Services Project2"
+      SSIS_SERVER: "LAPTOP-938SNHB2\\MSSQLSERVER01"
+      SSISDB_PATH: "/SSISDB/${{ env.SSIS_FOLDER }}/${{ env.SSIS_PROJECT }}"
+      ISDEPLOYMENTWIZARD: "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\ISDeploymentWizard.exe"
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4  # Updated to latest version
+
+      - name: Validate prerequisites
+        shell: powershell
+        run: |
+          # Check if ISDeploymentWizard exists
+          if (-Not (Test-Path "${{ env.ISDEPLOYMENTWIZARD }}")) {
+            throw "ISDeploymentWizard not found at: ${{ env.ISDEPLOYMENTWIZARD }}"
+          }
+          # Check if ISPAC file exists
+          if (-Not (Test-Path "${{ env.ISPAC_PATH }}")) {
+            throw "ISPAC file not found at: ${{ env.ISPAC_PATH }}"
+          }
+          Write-Host "Prerequisites validated successfully."
+
+      - name: Create SSISDB folder if not exists
+        shell: powershell
+        run: |
+          # Load SQL Server module
+          Import-Module -Name SqlServer -ErrorAction SilentlyContinue
+          if (-Not (Get-Module -Name SqlServer)) {
+            Write-Warning "SqlServer module not found. Ensure it is installed on the runner."
+            exit 0  # Skip folder creation if module is unavailable
+          }
+          $server = "${{ env.SSIS_SERVER }}"
+          $folder = "${{ env.SSIS_FOLDER }}"
+          try {
+            $ssisdb = Get-SqlSsisCatalog -ServerInstance $server
+            if (-Not (Get-SqlSsisFolder -ServerInstance $server -FolderName $folder)) {
+              New-SqlSsisFolder -ServerInstance $server -FolderName $folder
+              Write-Host "Created SSISDB folder: $folder"
+            } else {
+              Write-Host "SSISDB folder already exists: $folder"
+            }
+          } catch {
+            Write-Warning "Failed to create SSISDB folder: $_"
+          }
 
       - name: Deploy SSIS .ispac to SSISDB
         shell: powershell
         run: |
-          # Allow script execution
-          Set-ExecutionPolicy Bypass -Scope Process -Force
-
-          # Define variables
-          $ispacPath = "$env:GITHUB_WORKSPACE/HandsOnProjects/Timesheet/Packages/Integration Services Project2/bin/Development/Integration Services Project2.ispac"
-          $folderName = "Automation"
-          $projectName = "Integration Services Project2"
-          $destinationServer = "LAPTOP-938SNHB2\MSSQLSERVER01"
-          $destinationPath = "/SSISDB/$folderName/$projectName"
-
-          if (-Not (Test-Path $ispacPath)) {
-            throw " ISPAC file not found at path: $ispacPath"
-          }
-
           Write-Host "Starting SSIS deployment..."
-          Write-Host "ISPAC Path: $ispacPath"
-          Write-Host "Deploying to: $destinationPath"
-
-          & "C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\ISDeploymentWizard.exe" `
+          Write-Host "ISPAC Path: ${{ env.ISPAC_PATH }}"
+          Write-Host "Deploying to: ${{ env.SSISDB_PATH }}"
+          
+          # Run ISDeploymentWizard
+          & "${{ env.ISDEPLOYMENTWIZARD }}" `
             /Silent `
             /ModelType:Project `
-            /SourcePath:"$ispacPath" `
-            /DestinationServer:"$destinationServer" `
-            /DestinationPath:"$destinationPath"
-
+            /SourcePath:"${{ env.ISPAC_PATH }}" `
+            /DestinationServer:"${{ env.SSIS_SERVER }}" `
+            /DestinationPath:"${{ env.SSISDB_PATH }}"
+          
           if ($LASTEXITCODE -ne 0) {
-            throw " SSIS deployment failed with exit code $LASTEXITCODE"
+            throw "SSIS deployment failed with exit code $LASTEXITCODE"
           } else {
-            Write-Host " SSIS deployment completed successfully."
+            Write-Host "SSIS deployment completed successfully."
           }

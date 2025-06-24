@@ -1,4 +1,4 @@
-name: Deploy SSIS Project and Create Scheduled Jobs
+name: Deploy Packages and Jobs
  
 on:
 

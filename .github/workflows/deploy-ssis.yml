@@ -74,7 +74,7 @@ jobs:
           Write-Host "Deploying SSIS project..."
 
           $ispacPath = "HandsOnProjects/Timesheet/Packages/Integration Services Project2/bin/Development/Integration Services Project2.ispac"
-          $deploymentWizard = "C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\ISDeploymentWizard.exe"
+          
 
           if (!(Test-Path $ispacPath)) {
 
@@ -103,7 +103,7 @@ jobs:
  
           $process = Start-Process `
 
-            -FilePath $deploymentWizard `
+            -FilePath = "C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\ISDeploymentWizard.exe" `
 
             -ArgumentList $deployArgs `
 

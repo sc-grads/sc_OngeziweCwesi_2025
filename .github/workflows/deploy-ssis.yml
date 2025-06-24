@@ -32,7 +32,7 @@ jobs:
 
           SQL_SERVER: ${{ secrets.SQL_SERVER }}
 
-          SQL_USERNAME: ${{ secrets.SQL_USERNAME }}
+          SQL_USERNAME: ${{ secrets.SQL_USER }}
 
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
 
@@ -131,7 +131,7 @@ jobs:
 
           SQL_SERVER: ${{ secrets.SQL_SERVER }}
 
-          SQL_USERNAME: ${{ secrets.SQL_USERNAME }}
+          SQL_USERNAME: ${{ secrets.SQL_USER }}
 
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
 
@@ -140,7 +140,7 @@ jobs:
         run: |
 
           Import-Module SqlServer -ErrorAction Stop
-          
+
           Write-Host "Creating SQL Agent Jobs to run every 2 minutes..."
  
           # Calculate start date and time in PowerShell

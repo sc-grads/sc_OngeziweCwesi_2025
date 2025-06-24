@@ -10,7 +10,7 @@ DECLARE @schedule_name NVARCHAR(128);
 DECLARE @command NVARCHAR(MAX);
 DECLARE @schedule_id INT;
 
--- Helper to delete all schedules with a specific name
+-- Helper to delete schedules safely
 CREATE TABLE #SchedulesToDelete (schedule_id INT);
 
 DECLARE @schedule_names TABLE (name NVARCHAR(128));
@@ -31,9 +31,7 @@ FETCH NEXT FROM schedule_cursor INTO @target_name;
 WHILE @@FETCH_STATUS = 0
 BEGIN
     INSERT INTO #SchedulesToDelete (schedule_id)
-    SELECT schedule_id
-    FROM msdb.dbo.sysschedules
-    WHERE name = @target_name;
+    SELECT schedule_id FROM msdb.dbo.sysschedules WHERE name = @target_name;
 
     DECLARE @sid INT;
     DECLARE scheduleid_cursor CURSOR FOR SELECT schedule_id FROM #SchedulesToDelete;
@@ -41,6 +39,9 @@ BEGIN
     FETCH NEXT FROM scheduleid_cursor INTO @sid;
     WHILE @@FETCH_STATUS = 0
     BEGIN
+        -- Detach from all jobs
+        EXEC msdb.dbo.sp_detach_schedule @schedule_id = @sid;
+        -- Now safe to delete
         EXEC msdb.dbo.sp_delete_schedule @schedule_id = @sid;
         FETCH NEXT FROM scheduleid_cursor INTO @sid;
     END
@@ -56,7 +57,6 @@ DROP TABLE #SchedulesToDelete;
 
 -- === Job Definitions Start ===
 
--- Reusable job creation block for each package
 DECLARE @jobs TABLE (
     job_name NVARCHAR(128),
     schedule_name NVARCHAR(128),
@@ -83,9 +83,7 @@ WHILE @@FETCH_STATUS = 0
 BEGIN
     BEGIN TRY
         EXEC msdb.dbo.sp_delete_job @job_name = @pkg_name;
-    END TRY BEGIN CATCH
-        PRINT 'Job not found: ' + @pkg_name;
-    END CATCH;
+    END TRY BEGIN CATCH END CATCH;
 
     EXEC msdb.dbo.sp_add_job @job_name = @pkg_name, @enabled = 1;
 

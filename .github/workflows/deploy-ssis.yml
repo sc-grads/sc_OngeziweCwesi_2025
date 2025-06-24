@@ -121,7 +121,7 @@ jobs:
               $jobName = "RunSSIS_${pkg}"
               $scheduleName = "Every2Min_${pkg}"
 
-              $jobScript = "
+              $jobScript = @"
               USE msdb;
 
               IF EXISTS (SELECT * FROM msdb.dbo.sysjobs WHERE name = '$jobName')
@@ -138,7 +138,7 @@ jobs:
                   @job_name = '$jobName',
                   @step_name = 'Run SSIS Package',
                   @subsystem = 'SSIS',
-                  @command = '/ISSERVER \"SSISDB\Automation\Integration Services Project2\${pkg}.dtsx \" /SERVER \"$env:SQL_SERVER\"',
+                  @command = '/ISSERVER "SSISDB\\Automation\\Integration Services Project2\\$pkg.dtsx" /SERVER "$env:SQL_SERVER"',
                   @on_success_action = 1,
                   @database_name = 'SSISDB';
 
@@ -160,7 +160,7 @@ jobs:
 
               EXEC msdb.dbo.sp_add_jobserver
                   @job_name = '$jobName';
-              "
+              "@
 
               try {
                   Invoke-Sqlcmd -ServerInstance $env:SQL_SERVER -Username $env:SQL_USERNAME -Password $env:SQL_PASSWORD -Query $jobScript -Encrypt Optional -TrustServerCertificate -ErrorAction Stop

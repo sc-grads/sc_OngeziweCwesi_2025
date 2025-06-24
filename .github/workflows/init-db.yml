@@ -28,7 +28,7 @@ jobs:
         run: |
           Write-Host "Running SQL script..."
           $sqlcmdPath = "sqlcmd"
-          $sqlFile = "HandsOnProjects/Timesheet/sql/server.ini.sql"
+          $sqlFile = "HandsOnProjects/Timesheet/sql/InitTimesheetDB.sql"
           $hostPort = "$env:PINGGY_HOSTPORT"
 
           # Verify sqlcmd is available

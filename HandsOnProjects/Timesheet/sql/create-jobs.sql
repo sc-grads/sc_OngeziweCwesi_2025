@@ -17,7 +17,7 @@ EXEC msdb.dbo.sp_add_job
     @delete_level = 0,
     @description = N'Scheduled job to execute SSIS package: {jobName} every 1 minute (30s not supported)',
     @category_name = N'[Uncategorized (Local)]',
-    @owner_login_name = N'{dbUser}', -- To be replaced with actual username
+    @owner_login_name = N'{Auto_user}', 
     @job_id = @jobId OUTPUT;
 GO
 

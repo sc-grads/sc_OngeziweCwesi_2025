@@ -83,11 +83,6 @@ jobs:
             exit 1
 
           }
-
-          if (!(Test-Path $deploymentWizard)) {
-              Write-Error "ISDeploymentWizard.exe not found at $deploymentWizard"
-              exit 1
-          }
  
           $deployArgs = @(
 

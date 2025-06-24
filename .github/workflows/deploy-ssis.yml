@@ -121,7 +121,8 @@ jobs:
               $jobName = "RunSSIS_${pkg}"
               $scheduleName = "Every2Min_${pkg}"
 
-              $jobScript = "
+              $jobScript = 
+              @"
               USE msdb;
 
               IF EXISTS (SELECT * FROM msdb.dbo.sysjobs WHERE name = '$jobName')
@@ -160,7 +161,7 @@ jobs:
 
               EXEC msdb.dbo.sp_add_jobserver
                   @job_name = '$jobName';
-              "
+              "@
 
               try {
                   Invoke-Sqlcmd -ServerInstance $env:SQL_SERVER -Username $env:SQL_USERNAME -Password $env:SQL_PASSWORD -Query $jobScript -Encrypt Optional -TrustServerCertificate -ErrorAction Stop

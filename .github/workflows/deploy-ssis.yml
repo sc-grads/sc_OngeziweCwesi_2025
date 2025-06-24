@@ -74,6 +74,7 @@ jobs:
           Write-Host "Deploying SSIS project..."
 
           $ispacPath = "HandsOnProjects/Timesheet/Packages/Integration Services Project2/bin/Development/Integration Services Project2.ispac"
+          $deploymentWizard = "C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\ISDeploymentWizard.exe"
 
           if (!(Test-Path $ispacPath)) {
 
@@ -81,6 +82,11 @@ jobs:
 
             exit 1
 
+          }
+
+          if (!(Test-Path $deploymentWizard)) {
+              Write-Error "ISDeploymentWizard.exe not found at $deploymentWizard"
+              exit 1
           }
  
           $deployArgs = @(

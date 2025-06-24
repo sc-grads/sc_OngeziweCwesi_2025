@@ -1,22 +1,21 @@
-
-```yaml
 name: Deploy Packages and Jobs
+
 on:
   workflow_run:
-    workflows:
-      - Initialize Timesheet DB
+    workflows: ["Initialize Timesheet DB"]
     types:
       - completed
-  workflow_dispatch: null
+  workflow_dispatch:
+
 jobs:
   deploy-ssis-project:
-    runs-on:
-      - self-hosted
-      - windows
+    runs-on: [self-hosted, windows]
     if: github.event.workflow_run.conclusion == 'success'
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
       - name: Verify SSISDB Catalog
         env:
           SQL_SERVER: ${{ secrets.SQL_SERVER }}
@@ -37,6 +36,7 @@ jobs:
 
           Invoke-Sqlcmd -ServerInstance $env:SQL_SERVER -Username $env:SQL_USERNAME -Password $env:SQL_PASSWORD -Query $query -Encrypt Optional -TrustServerCertificate -ErrorAction Stop
           Write-Host "SSISDB catalog verified."
+
       - name: Deploy SSIS Project (.ispac)
         env:
           SQL_SERVER: ${{ secrets.SQL_SERVER }}
@@ -92,13 +92,14 @@ jobs:
 
           Write-Host "SSIS project deployed successfully."
           Get-Content deploy_output.txt
+
       - name: Create SQL Agent Jobs with Recurring Schedule
         env:
           SQL_SERVER: ${{ secrets.SQL_SERVER }}
           SQL_USERNAME: ${{ secrets.SQL_USER }}
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
         shell: powershell
-        run: |-
+        run: |
           Import-Module SqlServer -ErrorAction Stop
           Write-Host "Creating SQL Agent Jobs to run every 2 minutes..."
 
@@ -120,8 +121,7 @@ jobs:
               $jobName = "RunSSIS_${pkg}"
               $scheduleName = "Every2Min_${pkg}"
 
-              $jobScript = 
-              @"
+              $jobScript =@"
               USE msdb;
 
               IF EXISTS (SELECT * FROM msdb.dbo.sysjobs WHERE name = '$jobName')

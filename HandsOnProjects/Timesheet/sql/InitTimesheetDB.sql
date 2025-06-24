@@ -1,9 +1,9 @@
 -- Create the database
-CREATE DATABASE TestingTimesheetDB;
+CREATE DATABASE TimesheetDB;
 GO
 
 -- Select the database context
-USE TestingTimesheetDB;
+USE TimesheetDB;
 GO
 
 -- ========================

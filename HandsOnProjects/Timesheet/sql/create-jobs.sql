@@ -11,7 +11,7 @@ DECLARE @command NVARCHAR(MAX);
 DECLARE @schedule_id INT;
 
 -- Helper to delete schedules safely
-CREATE TABLE #SchedulesToDelete (schedule_id INT);
+CREATE TABLE #SchedulesToDelete (schedule_id INT, job_id UNIQUEIDENTIFIER, job_name NVARCHAR(128));
 
 DECLARE @schedule_names TABLE (name NVARCHAR(128));
 INSERT INTO @schedule_names (name)
@@ -30,23 +30,39 @@ OPEN schedule_cursor;
 FETCH NEXT FROM schedule_cursor INTO @target_name;
 WHILE @@FETCH_STATUS = 0
 BEGIN
-    INSERT INTO #SchedulesToDelete (schedule_id)
-    SELECT schedule_id FROM msdb.dbo.sysschedules WHERE name = @target_name;
+    -- Find all jobs attached to the schedule
+    INSERT INTO #SchedulesToDelete (schedule_id, job_id, job_name)
+    SELECT s.schedule_id, j.job_id, j.name
+    FROM msdb.dbo.sysschedules s
+    LEFT JOIN msdb.dbo.sysjobschedules js ON s.schedule_id = js.schedule_id
+    LEFT JOIN msdb.dbo.sysjobs j ON js.job_id = j.job_id
+    WHERE s.name = @target_name;
 
-    DECLARE @sid INT;
-    DECLARE scheduleid_cursor CURSOR FOR SELECT schedule_id FROM #SchedulesToDelete;
+    -- Detach schedules from jobs
+    DECLARE @sid INT, @jid UNIQUEIDENTIFIER, @jname NVARCHAR(128);
+    DECLARE scheduleid_cursor CURSOR FOR 
+        SELECT schedule_id, job_id, job_name 
+        FROM #SchedulesToDelete 
+        WHERE job_id IS NOT NULL;
     OPEN scheduleid_cursor;
-    FETCH NEXT FROM scheduleid_cursor INTO @sid;
+    FETCH NEXT FROM scheduleid_cursor INTO @sid, @jid, @jname;
     WHILE @@FETCH_STATUS = 0
     BEGIN
-        -- Detach from all jobs
-        EXEC msdb.dbo.sp_detach_schedule @schedule_id = @sid;
-        -- Now safe to delete
-        EXEC msdb.dbo.sp_delete_schedule @schedule_id = @sid;
-        FETCH NEXT FROM scheduleid_cursor INTO @sid;
+        -- Detach the schedule from the job
+        EXEC msdb.dbo.sp_detach_schedule 
+            @job_id = @jid, 
+            @schedule_id = @sid;
+        FETCH NEXT FROM scheduleid_cursor INTO @sid, @jid, @jname;
     END
     CLOSE scheduleid_cursor;
     DEALLOCATE scheduleid_cursor;
+
+    -- Delete the schedule
+    SELECT @sid = schedule_id FROM #SchedulesToDelete;
+    IF @sid IS NOT NULL
+    BEGIN
+        EXEC msdb.dbo.sp_delete_schedule @schedule_id = @sid;
+    END
 
     DELETE FROM #SchedulesToDelete;
     FETCH NEXT FROM schedule_cursor INTO @target_name;

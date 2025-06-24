@@ -19,7 +19,7 @@ jobs:
       - name: Create SQL Agent Jobs
         env:
           SQL_SERVER: ${{ secrets.SQL_SERVER }}
-          SQL_USERNAME: ${{ secrets.SQL_USER }}
+          SQL_USERNAME: ${{ secrets.SQL_USERNAME }}
           SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
         shell: powershell
         run: |
@@ -33,7 +33,7 @@ jobs:
           $sqlScript = $sqlScript -replace '\$START_TIME', (Get-Date).ToString("HHmmss")
 
           try {
-              Invoke-Sqlcmd -ServerInstance $env:SQL_SERVER -Username $env:SQL_USER -Password $env:SQL_PASSWORD -Query $sqlScript -Encrypt Optional -TrustServerCertificate -ErrorAction Stop
+              Invoke-Sqlcmd -ServerInstance $env:SQL_SERVER -Username $env:SQL_USERNAME -Password $env:SQL_PASSWORD -Query $sqlScript -Encrypt Optional -TrustServerCertificate -ErrorAction Stop
               Write-Host "SQL Agent jobs created successfully."
           } catch {
               Write-Error "Failed to create SQL Agent jobs: $($_.Exception.Message)"

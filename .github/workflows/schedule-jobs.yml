@@ -1,0 +1,41 @@
+name: Schedule SQL Agent Jobs
+
+on:
+  workflow_run:
+    workflows: ["Deploy Packages and Jobs"]
+    types:
+      - completed
+  workflow_dispatch:
+
+jobs:
+  create-sql-agent-jobs:
+    runs-on: [self-hosted, windows]
+    if: github.event.workflow_run.conclusion == 'success'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create SQL Agent Jobs
+        env:
+          SQL_SERVER: ${{ secrets.SQL_SERVER }}
+          SQL_USERNAME: ${{ secrets.SQL_USER }}
+          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+        shell: powershell
+        run: |
+          Write-Host "Executing SQL Agent job creation script..."
+          Import-Module SqlServer -ErrorAction Stop
+
+          $sqlScript = Get-Content -Path "scripts/create_jobs.sql" -Raw
+          $sqlScript = $sqlScript -replace '\$SQL_SERVER', $env:SQL_SERVER
+          $sqlScript = $sqlScript -replace '\$SQL_USERNAME', $env:SQL_USERNAME
+          $sqlScript = $sqlScript -replace '\$START_DATE', (Get-Date).ToString("yyyyMMdd")
+          $sqlScript = $sqlScript -replace '\$START_TIME', (Get-Date).ToString("HHmmss")
+
+          try {
+              Invoke-Sqlcmd -ServerInstance $env:SQL_SERVER -Username $env:SQL_USERNAME -Password $env:SQL_PASSWORD -Query $sqlScript -Encrypt Optional -TrustServerCertificate -ErrorAction Stop
+              Write-Host "SQL Agent jobs created successfully."
+          } catch {
+              Write-Error "Failed to create SQL Agent jobs: $($_.Exception.Message)"
+              exit 1
+          }

@@ -62,67 +62,60 @@ jobs:
           Write-Host "SSISDB catalog verified."
  
       - name: Deploy SSIS Project (.ispac)
+  env:
+    SQL_SERVER: ${{ secrets.SQL_SERVER }}
+  shell: powershell
+  run: |
+    Write-Host "Deploying SSIS project..."
 
-        env:
+    $ispacPath = "HandsOnProjects/Timesheet/Packages/Integration Services Project2/bin/Development/Integration Services Project2.ispac"
+    $deploymentWizard = "C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\ISDeploymentWizard.exe"
 
-          SQL_SERVER: ${{ secrets.SQL_SERVER }}
+    # Debug: Verify paths
+    Write-Host "Current Directory: $(Get-Location)"
+    Write-Host "ISPAC Path: $ispacPath"
+    Write-Host "Deployment Wizard Path: $deploymentWizard"
 
-        shell: powershell
+    # Verify ISDeploymentWizard.exe exists
+    if (!(Test-Path $deploymentWizard)) {
+        Write-Error "ISDeploymentWizard.exe not found at $deploymentWizard"
+        exit 1
+    }
 
-        run: |
+    # Verify ISPAC file exists
+    if (!(Test-Path $ispacPath)) {
+        Write-Error "ISPAC file not found at $ispacPath"
+        exit 1
+    }
 
-          Write-Host "Deploying SSIS project..."
+    # Define deployment arguments
+    $deployArgs = @(
+        "/Silent",
+        "/SourcePath:`"$ispacPath`"",
+        "/DestinationServer:`"$env:SQL_SERVER`"",
+        "/DestinationPath:`"/SSISDB/Automation/Integration Services Project2`""
+    )
 
-          $ispacPath = "HandsOnProjects/Timesheet/Packages/Integration Services Project2/bin/Development/Integration Services Project2.ispac"
-          $deploymentWizard = "C:\Program Files (x86)\Microsoft SQL Server\160\DTS\Binn\ISDeploymentWizard.exe"
+    # Debug: Print arguments
+    Write-Host "Deploy Arguments: $deployArgs"
 
-          if (!(Test-Path $ispacPath)) {
+    # Run Start-Process without backticks
+    try {
+        $process = Start-Process -FilePath "$deploymentWizard" -ArgumentList $deployArgs -Wait -PassThru -NoNewWindow -RedirectStandardOutput "deploy_output.txt" -RedirectStandardError "deploy_error.txt"
+        Write-Host "Start-Process Exit Code: $($process.ExitCode)"
+    } catch {
+        Write-Error "Start-Process failed: $($_.Exception.Message)"
+        exit 1
+    }
 
-            Write-Error "ISPAC file not found at $ispacPath"
+    if ($process.ExitCode -ne 0) {
+        Write-Error "Deployment failed with exit code $($process.ExitCode)"
+        Get-Content deploy_error.txt
+        exit $process.ExitCode
+    }
 
-            exit 1
-
-          }
-
-          # Confirm Deployment Wizard exists
-          if (!(Test-Path $deploymentWizard)) {
-          Write-Error "ISDeploymentWizard.exe not found at $deploymentWizard"
-          exit 1
-          }
- 
-          $deployArgs = @(
-
-            "/Silent",
-
-            "/SourcePath:`"$ispacPath`"",
-
-            "/DestinationServer:""LAPTOP-938SNHB2\MSSQLSERVER01""",
-
-            "/DestinationPath:""/SSISDB/Automation/Integration Services Project2"""
-
-          )
- 
-          $process = Start-Process `
-
-            -FilePath $deploymentWizard `
-
-            -ArgumentList $deployArgs `
-
-            -Wait `
-
-            -PassThru `
-
-            -NoNewWindow `
-
-            -RedirectStandardOutput "deploy_output.txt" `
-
-            -RedirectStandardError "deploy_error.txt"
- 
-          if ($process.ExitCode -ne 0) {
-
-            Write-Error "Deployment failed with exit code $($process.ExitCode)"
-
-            Get-Content deploy_error.txt
+    Write-Host "SSIS project deployed successfully."
+    Get-Content deploy_output.txt
 
             exit $process.ExitCode
 

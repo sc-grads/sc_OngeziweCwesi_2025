@@ -11,26 +11,43 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install SQLCMD
-        run: |
-          curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-          curl https://packages.microsoft.com/config/ubuntu/22.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
-          sudo apt-get update
-          sudo ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
-          export PATH="$PATH:/opt/mssql-tools/bin"
-          echo "PATH=$PATH" >> $GITHUB_ENV
-
       - name: Extract Pinggy Host and Port
         id: extract
+        shell: powershell
         run: |
-          URI="${{ secrets.SQL_SERVER }}"
-          HOST_PORT="${URI#*://}"
-          echo "PINGGY_HOSTPORT=$HOST_PORT" >> $GITHUB_ENV
+          $uri = "${{ secrets.SQL_SERVER }}"
+          $hostPort = $uri -replace '^tcp://', ''
+          Write-Host "Extracted Host and Port: $hostPort"
+          echo "PINGGY_HOSTPORT=$hostPort" | Out-File -FilePath $env:GITHUB_ENV -Append
 
       - name: Run SQL script
         env:
           SQL_USER: ${{ secrets.SQL_USER }}
-          SQL_PASS: ${{ secrets.SQL_PASSWORD }}
+          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+        shell: powershell
         run: |
-          export PATH="$PATH:/opt/mssql-tools/bin"
-          sqlcmd -S $PINGGY_HOSTPORT -U $SQL_USER -P $SQL_PASS -i HandsOnProjects/Timesheet/sql/InitTimesheetDB.sql
+          Write-Host "Running SQL script..."
+          $sqlcmdPath = "sqlcmd"
+          $sqlFile = "HandsOnProjects/Timesheet/sql/server.ini.sql"
+          $hostPort = "$env:PINGGY_HOSTPORT"
+
+          # Verify sqlcmd is available
+          if (!(Get-Command -Name $sqlcmdPath)) {
+              Write-Error "sqlcmd not found in PATH. Ensure SQL Server tools are installed."
+              exit 1
+          }
+
+          # Verify SQL file exists
+          if (!(Test-Path $sqlFile)) {
+              Write-Error "SQL file not found at $sqlFile"
+              exit 1
+          }
+
+          # Run sqlcmd
+          try {
+              & $sqlcmdPath -S $hostPort -U $env:SQL_USER -P $env:SQL_PASSWORD -i $sqlFile
+              Write-Host "SQL script executed successfully."
+          } catch {
+              Write-Error "Failed to execute SQL script: $($_.Exception.Message)"
+              exit 1
+          }

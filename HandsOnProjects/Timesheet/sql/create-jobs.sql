@@ -16,8 +16,7 @@ EXEC msdb.dbo.sp_add_job
     @notify_level_eventlog = 2,
     @delete_level = 0,
     @description = N'Scheduled job to execute SSIS package: {jobName} every 1 minute (30s not supported)',
-    @category_name = N'[Uncategorized (Local)]',
-    @owner_login_name = N'{Auto_user}', 
+    @category_name = N'[Uncategorized (Local)]', 
     @job_id = @jobId OUTPUT;
 GO
 

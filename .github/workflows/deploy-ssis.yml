@@ -75,7 +75,7 @@ jobs:
           # Debug: Print arguments
           Write-Host "Deploy Arguments: $deployArgs"
 
-          # Run Start-Process without backticks
+          # Run Start-Process
           try {
               $process = Start-Process -FilePath "$deploymentWizard" -ArgumentList $deployArgs -Wait -PassThru -NoNewWindow -RedirectStandardOutput "deploy_output.txt" -RedirectStandardError "deploy_error.txt"
               Write-Host "Start-Process Exit Code: $($process.ExitCode)"
@@ -93,12 +93,38 @@ jobs:
           Write-Host "SSIS project deployed successfully."
           Get-Content deploy_output.txt
 
-      - name: Execute SSIS Package
+      - name: Execute SSIS Package - BillableTypePackage
         env:
           SQL_SERVER: ${{ secrets.SQL_SERVER }}
         shell: powershell
         run: |
-          Write-Host "Executing SSIS package..."
+          Write-Host "Executing SSIS package - BillableTypePackage..."
+
+          $query = @"
+          DECLARE @execution_id bigint;
+          EXEC [SSISDB].[catalog].[create_execution]
+              @folder_name = N'Automation',
+              @project_name = N'Integration Services Project2',
+              @package_name = N'BillableTypePackage.dtsx',
+              @execution_id = @execution_id OUTPUT;
+
+          EXEC [SSISDB].[catalog].[start_execution] @execution_id;
+          "@
+
+          try {
+              Invoke-Sqlcmd -ServerInstance $env:SQL_SERVER -Query $query -Encrypt Optional -TrustServerCertificate -ErrorAction Stop
+              Write-Host "SSIS package - BillableTypePackage executed successfully."
+          } catch {
+              Write-Error "Package execution failed: $($_.Exception.Message)"
+              exit 1
+          }
+
+      - name: Execute SSIS Package - ClientPackage
+        env:
+          SQL_SERVER: ${{ secrets.SQL_SERVER }}
+        shell: powershell
+        run: |
+          Write-Host "Executing SSIS package - ClientPackage..."
 
           $query = @"
           DECLARE @execution_id bigint;
@@ -113,7 +139,137 @@ jobs:
 
           try {
               Invoke-Sqlcmd -ServerInstance $env:SQL_SERVER -Query $query -Encrypt Optional -TrustServerCertificate -ErrorAction Stop
-              Write-Host "SSIS package executed successfully."
+              Write-Host "SSIS package - ClientPackage executed successfully."
+          } catch {
+              Write-Error "Package execution failed: $($_.Exception.Message)"
+              exit 1
+          }
+
+      - name: Execute SSIS Package - ConsultantPackage
+        env:
+          SQL_SERVER: ${{ secrets.SQL_SERVER }}
+        shell: powershell
+        run: |
+          Write-Host "Executing SSIS package - ConsultantPackage..."
+
+          $query = @"
+          DECLARE @execution_id bigint;
+          EXEC [SSISDB].[catalog].[create_execution]
+              @folder_name = N'Automation',
+              @project_name = N'Integration Services Project2',
+              @package_name = N'ConsultantPackage.dtsx',
+              @execution_id = @execution_id OUTPUT;
+
+          EXEC [SSISDB].[catalog].[start_execution] @execution_id;
+          "@
+
+          try {
+              Invoke-Sqlcmd -ServerInstance $env:SQL_SERVER -Query $query -Encrypt Optional -TrustServerCertificate -ErrorAction Stop
+              Write-Host "SSIS package - ConsultantPackage executed successfully."
+          } catch {
+              Write-Error "Package execution failed: $($_.Exception.Message)"
+              exit 1
+          }
+
+      - name: Execute SSIS Package - DescriptionPackage
+        env:
+          SQL_SERVER: ${{ secrets.SQL_SERVER }}
+        shell: powershell
+        run: |
+          Write-Host "Executing SSIS package - DescriptionPackage..."
+
+          $query = @"
+          DECLARE @execution_id bigint;
+          EXEC [SSISDB].[catalog].[create_execution]
+              @folder_name = N'Automation',
+              @project_name = N'Integration Services Project2',
+              @package_name = N'DescriptionPackage.dtsx',
+              @execution_id = @execution_id OUTPUT;
+
+          EXEC [SSISDB].[catalog].[start_execution] @execution_id;
+          "@
+
+          try {
+              Invoke-Sqlcmd -ServerInstance $env:SQL_SERVER -Query $query -Encrypt Optional -TrustServerCertificate -ErrorAction Stop
+              Write-Host "SSIS package - DescriptionPackage executed successfully."
+          } catch {
+              Write-Error "Package execution failed: $($_.Exception.Message)"
+              exit 1
+          }
+
+      - name: Execute SSIS Package - Employee
+        env:
+          SQL_SERVER: ${{ secrets.SQL_SERVER }}
+        shell: powershell
+        run: |
+          Write-Host "Executing SSIS package - Employee..."
+
+          $query = @"
+          DECLARE @execution_id bigint;
+          EXEC [SSISDB].[catalog].[create_execution]
+              @folder_name = N'Automation',
+              @project_name = N'Integration Services Project2',
+              @package_name = N'Employee.dtsx',
+              @execution_id = @execution_id OUTPUT;
+
+          EXEC [SSISDB].[catalog].[start_execution] @execution_id;
+          "@
+
+          try {
+              Invoke-Sqlcmd -ServerInstance $env:SQL_SERVER -Query $query -Encrypt Optional -TrustServerCertificate -ErrorAction Stop
+              Write-Host "SSIS package - Employee executed successfully."
+          } catch {
+              Write-Error "Package execution failed: $($_.Exception.Message)"
+              exit 1
+          }
+
+      - name: Execute SSIS Package - LeaveStaging
+        env:
+          SQL_SERVER: ${{ secrets.SQL_SERVER }}
+        shell: powershell
+        run: |
+          Write-Host "Executing SSIS package - LeaveStaging..."
+
+          $query = @"
+          DECLARE @execution_id bigint;
+          EXEC [SSISDB].[catalog].[create_execution]
+              @folder_name = N'Automation',
+              @project_name = N'Integration Services Project2',
+              @package_name = N'LeaveStaging.dtsx',
+              @execution_id = @execution_id OUTPUT;
+
+          EXEC [SSISDB].[catalog].[start_execution] @execution_id;
+          "@
+
+          try {
+              Invoke-Sqlcmd -ServerInstance $env:SQL_SERVER -Query $query -Encrypt Optional -TrustServerCertificate -ErrorAction Stop
+              Write-Host "SSIS package - LeaveStaging executed successfully."
+          } catch {
+              Write-Error "Package execution failed: $($_.Exception.Message)"
+              exit 1
+          }
+
+      - name: Execute SSIS Package - Package1
+        env:
+          SQL_SERVER: ${{ secrets.SQL_SERVER }}
+        shell: powershell
+        run: |
+          Write-Host "Executing SSIS package - Package1..."
+
+          $query = @"
+          DECLARE @execution_id bigint;
+          EXEC [SSISDB].[catalog].[create_execution]
+              @folder_name = N'Automation',
+              @project_name = N'Integration Services Project2',
+              @package_name = N'Package1.dtsx',
+              @execution_id = @execution_id OUTPUT;
+
+          EXEC [SSISDB].[catalog].[start_execution] @execution_id;
+          "@
+
+          try {
+              Invoke-Sqlcmd -ServerInstance $env:SQL_SERVER -Query $query -Encrypt Optional -TrustServerCertificate -ErrorAction Stop
+              Write-Host "SSIS package - Package1 executed successfully."
           } catch {
               Write-Error "Package execution failed: $($_.Exception.Message)"
               exit 1

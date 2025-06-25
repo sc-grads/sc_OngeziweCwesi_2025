@@ -96,8 +96,6 @@ jobs:
       - name: Execute SSIS Package
         env:
           SQL_SERVER: ${{ secrets.SQL_SERVER }}
-          SQL_USERNAME: ${{ secrets.SQL_USER }}
-          SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
         shell: powershell
         run: |
           Write-Host "Executing SSIS package..."
@@ -114,7 +112,7 @@ jobs:
           "@
 
           try {
-              Invoke-Sqlcmd -ServerInstance $env:SQL_SERVER -Username $env:SQL_USERNAME -Password $env:SQL_PASSWORD -Query $query -Encrypt Optional -TrustServerCertificate -ErrorAction Stop
+              Invoke-Sqlcmd -ServerInstance $env:SQL_SERVER -Query $query -Encrypt Optional -TrustServerCertificate -ErrorAction Stop
               Write-Host "SSIS package executed successfully."
           } catch {
               Write-Error "Package execution failed: $($_.Exception.Message)"

@@ -105,7 +105,7 @@ jobs:
           EXEC [SSISDB].[catalog].[create_execution]
               @folder_name = N'Automation',
               @project_name = N'Integration Services Project2',
-              @package_name = N'Integration Services Project2.dtsx',
+              @package_name = N'ClientPackage.dtsx',
               @execution_id = @execution_id OUTPUT;
 
           EXEC [SSISDB].[catalog].[start_execution] @execution_id;

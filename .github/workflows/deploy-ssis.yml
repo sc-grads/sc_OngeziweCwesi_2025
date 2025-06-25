@@ -63,9 +63,9 @@ jobs:
 
           $deployArgs = @(
               "/Silent",
-              "/SourcePath:`"$ispacPath`"",
-              "/DestinationServer:`"$env:SQL_SERVER`"",
-              "/DestinationPath:`"/SSISDB/Automation/Integration Services Project2`""
+              "/SourcePath=`"$ispacPath`"",
+              "/DestinationServer=`"$env:SQL_SERVER`"",
+              "/DestinationPath=`"/SSISDB/Automation/Integration Services Project2`""
           )
 
           Write-Host "Deploy Arguments: $deployArgs"
@@ -108,22 +108,26 @@ jobs:
           foreach ($package in $packages) {
             Write-Host "Starting execution for: $package"
 
-            $query = @"
-            DECLARE @execution_id BIGINT;
+            $query = "DECLARE @execution_id BIGINT;
             EXEC [SSISDB].[catalog].[create_execution]
-                @package_name = N'$package',
-                @execution_id = @execution_id OUTPUT,
-                @folder_name = N'Automation',
-                @project_name = N'Integration Services Project2',
-                @use32bitruntime = False,
-                @reference_id = NULL;
+              @package_name = N'$package',
+              @execution_id = @execution_id OUTPUT,
+              @folder_name = N'Automation',
+              @project_name = N'Integration Services Project2',
+              @use32bitruntime = False,
+              @reference_id = NULL;
 
-            EXEC [SSISDB].[catalog].[start_execution] @execution_id;
-            "@
+            EXEC [SSISDB].[catalog].[start_execution] @execution_id;"
 
-            Invoke-Sqlcmd -ServerInstance $env:SQL_SERVER -Username $env:SQL_USERNAME -Password $env:SQL_PASSWORD -Query $query -Encrypt Optional -TrustServerCertificate -ErrorAction Stop
+            Invoke-Sqlcmd -ServerInstance $env:SQL_SERVER `
+                          -Username $env:SQL_USERNAME `
+                          -Password $env:SQL_PASSWORD `
+                          -Query $query `
+                          -Encrypt Optional `
+                          -TrustServerCertificate `
+                          -ErrorAction Stop
 
-            Write-Host "Started: $package"
+            Write-Host "Executed: $package"
           }
 
-          Write-Host "All packages executed."
+          Write-Host " All packages executed successfully."

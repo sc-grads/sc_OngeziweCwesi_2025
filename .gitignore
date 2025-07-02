@@ -3,5 +3,6 @@
 *.ispac
 bin/
 obj/
-*.ispac
+__pycache__/
+*.pyc
 

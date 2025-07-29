@@ -3,5 +3,11 @@
 *.ispac
 bin/
 obj/
-*.ispac
+__pycache__/
+*.pyc
 
+SSRSreport/*.bak
+SSRSreport/*.bak
+SSRSreport/AdventureWorks2019.bak
+sc_OngeziweCwesi_2025/
+sc_OngeziweCwesi_2025.git/

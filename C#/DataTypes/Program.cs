@@ -9,10 +9,10 @@ string petsName;
 
 //initialize variable
 petsName = "Bobby";
-
 Console.WriteLine($"my pet is {petsName}");
-petsName = "Sporty";
 
+//assign a new value
+petsName = "Sporty";
 Console.WriteLine($"my pet is {petsName}");
 
 //Value Type

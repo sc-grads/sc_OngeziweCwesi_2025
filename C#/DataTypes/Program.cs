@@ -4,6 +4,17 @@ Console.WriteLine("Hello, World!");
 //Reference Type
 string myName = "Ongeziwe";
 
+//defining or setting up a variable
+string petsName;
+
+//initialize variable
+petsName = "Bobby";
+
+Console.WriteLine($"my pet is {petsName}");
+petsName = "Sporty";
+
+Console.WriteLine($"my pet is {petsName}");
+
 //Value Type
 int myAge = 35;
 //double pi = -3.14;

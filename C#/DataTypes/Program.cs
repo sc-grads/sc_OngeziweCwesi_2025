@@ -1,5 +1,23 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+
+//implicitely typed variable
+var myFavoriteGenre = "LitRPGs";
+
+var myFavoriteNumber = 13;
+
+var yourFavoriteNumber = 14;
+
+var ourNumbersCombined = myFavoriteNumber + yourFavoriteNumber;
+
+//Operators and Orders of Evaluation
+
+int num1 = 5;
+int num2 = 13;
+
+Console.WriteLine("Addition num1 + num2 = " + num1 + num2);
+//Console.WriteLine("Subtraction num1 - num2 = " + num1 - num2);
+Console.WriteLine("Multiplication num1 * num2 = " + num1 * num2);
+Console.WriteLine("Division num1 / num2 = " + num1 / num2);
 
 //Reference Type
 string myName = "Ongeziwe";

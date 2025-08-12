@@ -12,10 +12,11 @@ var ourNumbersCombined = myFavoriteNumber + yourFavoriteNumber;
 //Operators and Orders of Evaluation
 
 int num1 = 5;
-int num2 = 13;
+Console.WriteLine("Please enter a whole number!");
+int num2 = int.Parse(Console.ReadLine());
 
-Console.WriteLine("Addition num1 + num2 = " + num1 + num2);
-//Console.WriteLine("Subtraction num1 - num2 = " + num1 - num2);
+Console.WriteLine("Addition num1 + num2 = " + (num1 + num2));
+Console.WriteLine("Subtraction num1 - num2 = " + (num1 - num2));
 Console.WriteLine("Multiplication num1 * num2 = " + num1 * num2);
 Console.WriteLine("Division num1 / num2 = " + num1 / num2);
 

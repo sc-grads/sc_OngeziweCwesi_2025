@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Currency_Converter_Static" xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="Currency Converter" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
-    <Grid>
+    
+            <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="80"></RowDefinition>
@@ -80,4 +81,5 @@
         </StackPanel>
 
     </Grid>
+        
 </Window>

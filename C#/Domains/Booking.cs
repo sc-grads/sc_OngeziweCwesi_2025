@@ -10,6 +10,7 @@ namespace Domains
     {
         public string Email { get; set; }
         public int NumberOfSeats { get; set; }
+        public string PassengerEmail { get; set; }
 
         public Booking(string email, int numberOfSeats)
         {

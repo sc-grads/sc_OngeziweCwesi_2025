@@ -1,0 +1,582 @@
+﻿CITY                           noofemployees
+------------------------------ -------------
+Abingdon                       1
+Albany                         4
+Alexandria                     2
+Alhambra                       1
+Alpine                         1
+Altadena                       2
+Altamonte Springs              1
+Anacortes                      3
+Arlington                      1
+Ascheim                        1
+Atlanta                        2
+Auburn                         1
+Augsburg                       2
+Augusta                        1
+Aujan Mournede                 1
+Aurora                         1
+Austell                        1
+Austin                         2
+Bad Soden                      1
+Baldwin Park                   1
+Ballard                        69
+Baltimore                      1
+Barrie                         1
+Barstow                        2
+Basingstoke Hants              3
+Baytown                        2
+Beaverton                      213
+Bell Gardens                   2
+Bellevue                       41
+Bellflower                     194
+Bellingham                     213
+Bendigo                        104
+Berkeley                       202
+Berks                          32
+Berkshire                      32
+Berlin                         193
+Beverly Hills                  188
+Billericay                     56
+Billings                       2
+Biloxi                         2
+Birmingham                     34
+Bluffton                       2
+Bobigny                        58
+Boise                          1
+Bonn                           64
+Bordeaux                       1
+Boston                         1
+Bothell                        26
+Bottrop                        57
+Boulogne-Billancourt           15
+Boulogne-sur-Mer               17
+Bountiful                      2
+Bracknell                      32
+Bradenton                      2
+Braintree                      2
+Brampton                       1
+Branch                         2
+Branson                        2
+Braunschweig                   32
+Bremerton                      184
+Brisbane                       106
+Brossard                       2
+Burbank                        196
+Burien                         215
+Burlingame                     201
+Burnaby                        32
+Bury                           56
+Byron                          2
+Calgary                        23
+Caloundra                      106
+Camarillo                      5
+Cambridge                      33
+Campbellsville                 2
+Canoga Park                    2
+Carnation                      5
+Carol Stream                   2
+Carrollton                     2
+Carson                         2
+Casper                         2
+Cedar City                     2
+Cedar Park                     2
+Central Valley                 2
+Cergy                          31
+Cerritos                       2
+Chalk Riber                    2
+Chandler                       4
+Chantilly                      2
+Charlotte                      2
+Chatou                         56
+Cheektowaga                    2
+Chehalis                       2
+Cheltenham                     55
+Cheyenne                       4
+Chicago                        11
+Chula Vista                    207
+Cincinnati                     4
+Citrus Heights                 2
+City Of Commerce               2
+Clackamas                      4
+Clarkston                      2
+Clay                           2
+Clearwater                     4
+Cliffside                      188
+Cloverdale                     81
+Coffs Harbour                  106
+College Station                2
+Colma                          168
+Colombes                       62
+Colomiers                      31
+Columbus                       4
+Concord                        214
+Coronado                       134
+Corpus Christi                 1
+Corvallis                      95
+Courbevoie                     31
+Cranbourne                     106
+Croix                          31
+Crossville                     1
+Culver City                    2
+Daleville                      1
+Dallas                         7
+Daly City                      90
+Darlinghurst                   81
+Darmstadt                      55
+De Witt                        1
+Decatur                        1
+Denby                          1
+Denver                         3
+Destin                         1
+Detroit                        3
+Dorval                         1
+Downey                         112
+Drancy                         56
+Dresden                        31
+Duesseldorf                    31
+Duluth                         2
+Dunkerque                      56
+Duvall                         10
+East Brisbane                  81
+East Haven                     1
+Edina                          1
+Edmonds                        119
+Edmonton                       2
+Eilenburg                      31
+El Cajon                       105
+El Segundo                     3
+Elgin                          1
+Elk Grove                      1
+Ellensburg                     1
+Endicott                       1
+Englewood                      1
+Erlangen                       56
+Escondido                      1
+Esher-Molesey                  55
+Essen                          31
+Etobicoke                      2
+Euclid                         1
+Eureka                         1
+Everett                        121
+Falls Church                   1
+Farmington                     1
+Federal Way                    1
+Ferguson                       1
+Fernley                        1
+Findon                         81
+Florence                       2
+Fontana                        1
+Fort Wayne                     1
+Fort Worth                     1
+Frankfurt                      86
+Frankfurt am Main              62
+Fremont                        76
+Fullerton                      1
+Gaffney                        1
+Garland                        2
+Gateshead                      55
+Geelong                        106
+Gilbert                        1
+Gilroy                         1
+Glendale                       104
+Gloucestershire                31
+Gold Bar                       5
+Gold Coast                     106
+Goulburn                       106
+Great Falls                    1
+Greeley                        1
+Greensboro                     1
+Grevenbroich                   31
+Grossmont                      100
+Gulfport                       1
+Hamburg                        117
+Hamden                         1
+Haney                          90
+Hanford                        1
+Hannover                       31
+Hawthorne                      81
+Hayward                        1
+Heath                          1
+Hervey Bay                     105
+High Wycombe                   31
+Hillsboro                      2
+Hixson                         1
+Hobart                         106
+Hof                            56
+Holland                        2
+Hollywood                      1
+Hooksett                       1
+Houston                        5
+Howell                         1
+Hull                           1
+Humble                         1
+Huntsville                     2
+Idaho Falls                    1
+Imperial Beach                 93
+Index                          5
+Indianapolis                   3
+Ingolstadt                     56
+Irvine                         1
+Irving                         2
+Issaquah                       120
+Ithaca                         1
+Jefferson City                 1
+Johnson Creek                  1
+Joliet                         1
+Kanata                         1
+Kannapolis                     1
+Kansas City                    2
+Kassel                         55
+Kelso                          2
+Kendall                        1
+Kenmore                        13
+Kennewick                      1
+Kent                           3
+Kiel                           31
+Killeen                        1
+Kingsport                      1
+Kingston                       2
+Kirkby                         55
+Kirkland                       95
+Kittery                        2
+Klamath Falls                  1
+La Grange                      1
+La Jolla                       94
+La Marque                      1
+La Mesa                        2
+La Vergne                      1
+Lacey                          1
+Lake Elsinore                  1
+Lake George                    1
+Lake Oswego                    105
+Lakeland                       1
+Lakewood                       85
+Lancaster                      31
+Lane Cove                      81
+Langford                       105
+Langley                        92
+Laredo                         1
+Las Cruces                     1
+Las Vegas                      3
+Lavender Bay                   85
+Lebanon                        111
+Leeds                          55
+Leesburg                       1
+Leipzig                        31
+Lemon Grove                    109
+Les Ulis                       94
+Lewiston                       1
+Lieusaint                      31
+Lille                          56
+Lincoln Acres                  102
+Liverpool                      31
+Logansport                     1
+London                         434
+Long Beach                     97
+Longmont                       1
+Longview                       1
+Los Angeles                    93
+Loveland                       2
+Lynnwood                       101
+Madison Heights                1
+Maidenhead                     31
+Malabar                        81
+Mansfield                      1
+Marietta                       1
+Markham                        1
+Marysville                     93
+Maryville                      1
+Matraville                     83
+Mcdonough                      2
+Medford                        3
+Melbourne                      110
+Melton                         105
+Melville                       1
+Memphis                        5
+Mentor                         1
+Merritt Island                 1
+Mesa                           1
+Mesquite                       1
+Metchosin                      96
+Metz                           56
+Miami                          10
+Michigan City                  1
+Midland                        1
+Milford                        2
+Mill Valley                    87
+Millington                     3
+Milpitas                       1
+Milsons Point                  80
+Milton Keynes                  63
+Milwaukee                      1
+Milwaukie                      105
+Minneapolis                    3
+Mississauga                    6
+Missoula                       2
+Mobile                         1
+Modesto                        2
+Moline                         1
+Monroe                         16
+Monrovia                       1
+Montgomery                     1
+Montreal                       13
+Morangis                       31
+Mosinee                        1
+Muehlheim                      1
+Mühlheim                       30
+München                        94
+Münster                        30
+Myrtle Beach                   1
+N. Vancouver                   99
+Nashua                         2
+Nashville                      3
+National City                  101
+Nepean                         1
+Neunkirchen                    55
+Nevada                         1
+New Castle                     1
+New Hartford                   1
+New Haven                      1
+New York                       2
+Newark                         1
+Newcastle                      80
+Newcastle upon Tyne            55
+Newport                        1
+Newport Beach                  91
+Newport Hills                  8
+Newport News                   1
+Newton                         90
+Norridge                       1
+North Bend                     1
+North Las Vegas                1
+North Miami Beach              1
+North Randall                  1
+North Ryde                     82
+North Sioux City               1
+North Sydney                   82
+North York                     1
+Norwalk                        2
+Norwood                        1
+Novato                         90
+Novi                           1
+Oak Bay                        99
+Oakland                        88
+Oberlin                        1
+Odessa                         1
+Offenbach                      31
+Ogden                          1
+Olympia                        93
+Ontario                        2
+Orange                         1
+Oregon City                    87
+Orlando                        4
+Orleans                        62
+Orly                           31
+Ottawa                         7
+Outremont                      1
+Oxford                         86
+Oxnard                         2
+Oxon                           31
+Paderborn                      86
+Palo Alto                      93
+Pantin                         62
+Paris                          398
+Paris La Defense               31
+Park City                      1
+Parker                         1
+Peoria                         1
+Perth                          80
+Peterborough                   55
+Philadelphia                   1
+Phoenix                        5
+Pigeon Forge                   1
+Plaistow                       1
+Plano                          1
+Pleasanton                     1
+Pnot-Rouge                     1
+Poing                          31
+Pontiac                        1
+Port Hammond                   95
+Port Huron                     1
+Port Macquarie                 105
+Port Orchard                   90
+Portland                       95
+Puyallup                       99
+Quebec                         2
+Racine                         1
+Raleigh                        1
+Randolph                       1
+Reading                        31
+Redford                        1
+Redlands                       1
+Redmond                        121
+Redwood City                   84
+Reno                           1
+Renton                         115
+Rhodes                         83
+Richmond                       7
+Richmond Hill                  2
+Rio Rancho                     1
+Riverton                       1
+Rock Springs                   1
+Rockhampton                    105
+Rocky Mount                    1
+Roissy en Brie                 31
+Roncq                          31
+Roubaix                        56
+Round Rock                     2
+Royal Oak                      94
+Runcorn                        55
+Saarbrücken                    31
+Saarlouis                      55
+Sacramento                     1
+Saginaw                        2
+Saint Ann                      1
+Saint Germain en Laye          56
+Saint John                     1
+Saint Louis                    4
+Saint Matthews                 1
+Saint Ouen                     62
+Saint-Denis                    56
+Sainte-Foy                     1
+Salem                          101
+Salt Lake City                 4
+Salzgitter                     31
+Sammamish                      19
+San Antonio                    6
+San Bruno                      1
+San Carlos                     88
+San Diego                      93
+San Francisco                  51
+San Gabriel                    96
+San Jose                       2
+San Mateo                      1
+San Ramon                      1
+San Ysidro                     1
+Sand City                      1
+Sandpoint                      1
+Sandy                          1
+Santa Ana                      2
+Santa Cruz                     94
+Santa Fe                       1
+Santa Monica                   92
+Sarasota                       1
+Saugus                         1
+Savannah                       1
+Scarborough                    1
+Scottsdale                     2
+Seaford                        80
+Seattle                        141
+Sedro Woolley                  88
+Sequim                         1
+Sèvres                         31
+Shawnee                        111
+Shelton                        1
+Sherman Oaks                   1
+Sillery                        1
+Silverwater                    80
+Simi Valley                    1
+Smithfield                     1
+Snohomish                      10
+Solingen                       55
+Somerset                       1
+Sooke                          97
+South Bend                     1
+South Melbourne                80
+Southfield                     1
+Southgate                      1
+Sparks                         1
+Spokane                        89
+Spring Valley                  92
+Springdale                     1
+Springfield                    1
+Springwood                     80
+St. Leonards                   80
+St. Louis                      1
+Stafford                       1
+Stamford                       1
+Stockton                       1
+Stoke-on-Trent                 55
+Stuttgart                      62
+Sugar Land                     1
+Sulzbach Taunus                32
+Sunbury                        105
+Sunrise                        1
+Suresnes                       31
+Surprise                       1
+Surrey                         3
+Suwanee                        1
+Sydney                         106
+Tacoma                         96
+Tampa                          1
+Tigard                         1
+Tilton                         1
+Tooele                         1
+Toronto                        24
+Torrance                       103
+Townsville                     105
+Trabuco Canyon                 1
+Tremblay-en-France             56
+Troutdale                      1
+Tucson                         2
+Tupelo                         1
+Tuscola                        1
+Union City                     1
+Union Gap                      1
+Upland                         1
+Vacaville                      1
+Valley Stream                  1
+Van Nuys                       1
+Vancouver                      98
+Vero Beach                     1
+Verrieres Le Buisson           31
+Versailles                     56
+Victoria                       93
+Ville De'anjou                 1
+Villeneuve-d'Ascq              56
+Virginia Beach                 1
+Visalia                        1
+Vista                          2
+W. Linn                        89
+W. York                        32
+Walla Walla                    100
+Walnut Creek                   1
+Warrington                     86
+Warrnambool                    105
+Warwick                        1
+Washougal                      1
+Waterbury                      1
+Waterloo                       2
+Watford                        55
+Wenatchee                      1
+Werne                          56
+West Chicago                   1
+West Covina                    92
+West Kingston                  1
+West Sussex                    31
+Westland                       1
+Westminster                    94
+Weston                         1
+Westport                       1
+Whittier                       1
+Winnipeg                       2
+Winston-Salem                  1
+Wokingham                      31
+Wollongong                     105
+Wood Dale                      2
+Woodburn                       91
+Woodbury                       1
+Woodinville                    1
+Woodland Hills                 96
+Woolston                       31
+Woonsocket                     1
+Wrentham                       1
+Yakima                         96
+York                           117
+Zeeland                        1
+
+(575 rows affected)
+
+
+Completion time: 2025-12-04T14:44:31.0087819+02:00

@@ -1,0 +1,13 @@
+﻿ContactTypeID Name
+------------- --------------------------------------------------
+19            Sales Manager
+15            Purchasing Manager
+13            Product Manager
+8             Marketing Manager
+6             International Marketing Manager
+1             Accounting Manager
+
+(6 rows affected)
+
+
+Completion time: 2025-12-04T14:55:24.2843449+02:00

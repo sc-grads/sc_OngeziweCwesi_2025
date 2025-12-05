@@ -1,0 +1,10 @@
+﻿ContactTypeID ContactTypeName                                    NoContacts
+------------- -------------------------------------------------- -----------
+11            Owner                                              266
+15            Purchasing Manager                                 245
+14            Purchasing Agent                                   242
+
+(3 rows affected)
+
+
+Completion time: 2025-12-04T16:33:15.2383901+02:00

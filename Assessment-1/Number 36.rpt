@@ -1,0 +1,12 @@
+﻿DepartmentID Name                                               GroupName
+------------ -------------------------------------------------- --------------------------------------------------
+6            Research and Development                           Research and Development
+7            Production                                         Manufacturing
+8            Production Control                                 Manufacturing
+9            Human Resources                                    Executive General and Administration
+10           Finance                                            Executive General and Administration
+
+(5 rows affected)
+
+
+Completion time: 2025-12-10T13:16:12.4884720+02:00

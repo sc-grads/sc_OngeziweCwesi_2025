@@ -1,0 +1,24 @@
+﻿businessentityid lastname                                           territoryname                                      countryregionname
+---------------- -------------------------------------------------- -------------------------------------------------- --------------------------------------------------
+274              Jiang                                              NULL                                               NULL
+285              Abbas                                              NULL                                               NULL
+287              Alberts                                            NULL                                               NULL
+286              Tsoflias                                           Australia                                          Australia
+278              Vargas                                             Canada                                             Canada
+282              Saraiva                                            Canada                                             Canada
+290              Varkey Chudukatil                                  France                                             France
+288              Valdez                                             Germany                                            Germany
+289              Pak                                                United Kingdom                                     United Kingdom
+277              Carson                                             Central                                            United States
+275              Blythe                                             Northeast                                          United States
+283              Campbell                                           Northwest                                          United States
+284              Mensa-Annan                                        Northwest                                          United States
+280              Ansman-Wolfe                                       Northwest                                          United States
+279              Reiter                                             Southeast                                          United States
+276              Mitchell                                           Southwest                                          United States
+281              Ito                                                Southwest                                          United States
+
+(17 rows affected)
+
+
+Completion time: 2025-12-10T09:55:01.5116408+02:00

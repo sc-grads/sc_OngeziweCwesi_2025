@@ -1,0 +1,13 @@
+﻿DepartmentID Name                                               GroupName
+------------ -------------------------------------------------- --------------------------------------------------
+11           Information Services                               Executive General and Administration
+12           Document Control                                   Quality Assurance
+13           Quality Assurance                                  Quality Assurance
+14           Facilities and Maintenance                         Executive General and Administration
+15           Shipping and Receiving                             Inventory Management
+16           Executive                                          Executive General and Administration
+
+(6 rows affected)
+
+
+Completion time: 2025-12-10T13:16:36.7597816+02:00

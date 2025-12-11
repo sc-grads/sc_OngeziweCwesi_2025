@@ -1,0 +1,21 @@
+﻿FirstName                                          LastName                                           Row Number           Rank                 Dense Rank           Quartile             SalesYTD              PostalCode
+-------------------------------------------------- -------------------------------------------------- -------------------- -------------------- -------------------- -------------------- --------------------- ---------------
+Tete                                               Mensa-Annan                                        1                    1                    1                    1                    1576562,1966          02139
+Rachel                                             Valdez                                             2                    2                    2                    1                    1827066,7118          14111
+Lynn                                               Tsoflias                                           3                    3                    3                    1                    1421810,9242          3000
+Ranjit                                             Varkey Chudukatil                                  4                    4                    4                    1                    3121616,3202          33000
+Tsvi                                               Reiter                                             5                    5                    5                    2                    2315185,611           38103
+Michael                                            Blythe                                             6                    6                    6                    2                    3763178,1787          48226
+Jillian                                            Carson                                             7                    7                    7                    2                    3189418,3662          55802
+Linda                                              Mitchell                                           8                    8                    8                    2                    4251368,5497          84407
+Shu                                                Ito                                                9                    9                    9                    3                    2458535,6169          94109
+Pamela                                             Ansman-Wolfe                                       10                   10                   10                   3                    1352577,1325          97205
+David                                              Campbell                                           11                   11                   11                   3                    1573012,9383          98004
+Jae                                                Pak                                                12                   12                   12                   4                    4116871,2277          BA5 3HX
+José                                               Saraiva                                            13                   13                   13                   4                    2604540,7172          K4B 1T7
+Garrett                                            Vargas                                             14                   14                   14                   4                    1453719,4653          T2P 2G8
+
+(14 rows affected)
+
+
+Completion time: 2025-12-10T13:11:51.5463559+02:00

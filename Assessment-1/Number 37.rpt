@@ -1,0 +1,71 @@
+﻿Name                                               Color           ListPrice
+-------------------------------------------------- --------------- ---------------------
+Sport-100 Helmet, Red                              Red             34,99
+Sport-100 Helmet, Blue                             Blue            34,99
+Classic Vest, S                                    Blue            63,50
+Classic Vest, M                                    Blue            63,50
+Classic Vest, L                                    Blue            63,50
+LL Touring Frame - Blue, 50                        Blue            333,42
+LL Touring Frame - Blue, 54                        Blue            333,42
+LL Touring Frame - Blue, 58                        Blue            333,42
+LL Touring Frame - Blue, 62                        Blue            333,42
+LL Touring Frame - Blue, 44                        Blue            333,42
+LL Road Frame - Red, 44                            Red             337,22
+LL Road Frame - Red, 48                            Red             337,22
+LL Road Frame - Red, 52                            Red             337,22
+LL Road Frame - Red, 58                            Red             337,22
+LL Road Frame - Red, 60                            Red             337,22
+LL Road Frame - Red, 62                            Red             337,22
+ML Road Frame - Red, 44                            Red             594,83
+ML Road Frame - Red, 48                            Red             594,83
+ML Road Frame - Red, 52                            Red             594,83
+ML Road Frame - Red, 58                            Red             594,83
+ML Road Frame - Red, 60                            Red             594,83
+Touring-3000 Blue, 54                              Blue            742,35
+Touring-3000 Blue, 58                              Blue            742,35
+Touring-3000 Blue, 62                              Blue            742,35
+Touring-3000 Blue, 44                              Blue            742,35
+Touring-3000 Blue, 50                              Blue            742,35
+Road-650 Red, 58                                   Red             782,99
+Road-650 Red, 60                                   Red             782,99
+Road-650 Red, 62                                   Red             782,99
+Road-650 Red, 44                                   Red             782,99
+Road-650 Red, 48                                   Red             782,99
+Road-650 Red, 52                                   Red             782,99
+HL Touring Frame - Blue, 46                        Blue            1003,91
+HL Touring Frame - Blue, 50                        Blue            1003,91
+HL Touring Frame - Blue, 54                        Blue            1003,91
+HL Touring Frame - Blue, 60                        Blue            1003,91
+Touring-2000 Blue, 60                              Blue            1214,85
+Touring-2000 Blue, 46                              Blue            1214,85
+Touring-2000 Blue, 50                              Blue            1214,85
+Touring-2000 Blue, 54                              Blue            1214,85
+HL Road Frame - Red, 58                            Red             1431,50
+HL Road Frame - Red, 62                            Red             1431,50
+HL Road Frame - Red, 44                            Red             1431,50
+HL Road Frame - Red, 48                            Red             1431,50
+HL Road Frame - Red, 52                            Red             1431,50
+HL Road Frame - Red, 56                            Red             1431,50
+Road-450 Red, 58                                   Red             1457,99
+Road-450 Red, 60                                   Red             1457,99
+Road-450 Red, 44                                   Red             1457,99
+Road-450 Red, 48                                   Red             1457,99
+Road-450 Red, 52                                   Red             1457,99
+Touring-1000 Blue, 46                              Blue            2384,07
+Touring-1000 Blue, 50                              Blue            2384,07
+Touring-1000 Blue, 54                              Blue            2384,07
+Touring-1000 Blue, 60                              Blue            2384,07
+Road-250 Red, 44                                   Red             2443,35
+Road-250 Red, 48                                   Red             2443,35
+Road-250 Red, 52                                   Red             2443,35
+Road-250 Red, 58                                   Red             2443,35
+Road-150 Red, 62                                   Red             3578,27
+Road-150 Red, 44                                   Red             3578,27
+Road-150 Red, 48                                   Red             3578,27
+Road-150 Red, 52                                   Red             3578,27
+Road-150 Red, 56                                   Red             3578,27
+
+(64 rows affected)
+
+
+Completion time: 2025-12-10T13:33:17.7624730+02:00
